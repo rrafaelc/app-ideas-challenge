@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Border-radius Previewer</title>
+  </head>
+  <body>
+    <div id="container">
+      <h1>Border-radius Previewer</h1>
+
+      <div id="borderContainer">
+        <div id="border"></div>
+        <textarea id="result" readonly></textarea>
+      </div>
+
+      <div id="selectors">
+        <div class="inputSelector">
+          <div>
+            <label for="top-left">Top Left</label>
+            <input
+              id="top-left"
+              name="top-left"
+              type="range"
+              value="5"
+              min="0"
+              max="150"
+            />
+          </div>
+
+          <div>
+            <label for="bottom-left">Bottom Left</label>
+            <input
+              id="bottom-left"
+              name="bottom-left"
+              type="range"
+              value="5"
+              min="0"
+              max="150"
+            />
+          </div>
+        </div>
+
+        <div class="inputSelector">
+          <div>
+            <label for="top-right">Top Right</label>
+            <input
+              id="top-right"
+              name="top-right"
+              type="range"
+              value="5"
+              min="0"
+              max="150"
+            />
+          </div>
+
+          <div>
+            <label for="bottom-right">Bottom Right</label>
+            <input
+              id="bottom-right"
+              name="bottom-right"
+              type="range"
+              value="5"
+              min="0"
+              max="150"
+            />
+          </div>
+        </div>
+        <div id="radiusContainer">
+          <input
+            type="number"
+            name="radius"
+            id="radius"
+            min="0"
+            max="150"
+            value="5"
+          />
+          <label for="radius">Border for all corners</label>
+        </div>
+      </div>
+    </div>
+    <script src="scripts.js"></script>
+  </body>
+</html>
