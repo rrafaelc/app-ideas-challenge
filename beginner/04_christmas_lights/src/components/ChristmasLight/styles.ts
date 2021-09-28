@@ -62,7 +62,7 @@ export const ModalContainer = styled.div`
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 1;
+    z-index: 100;
 
     display: flex;
     justify-content: center;
@@ -85,7 +85,7 @@ export const Modal = styled.div<ModalProps>`
 
   background-color: #5f6061;
   color: #fff;
-  z-index: 2;
+  z-index: 200;
 `;
 
 export const Close = styled.button`
