@@ -4,6 +4,7 @@ import ChristmasLight from '../components/ChristmasLight';
 import QuantityButton from '../components/QuantityButton';
 import OnOff from '../components/OnOff/';
 import SpeedButton from '../components/SpeedButton';
+import Modal from './Modal';
 
 import { Container, Lights, Controls } from './styles';
 
@@ -12,6 +13,9 @@ const App: React.FC = () => {
   const [animate, setAnimate] = useState(true);
   const [quantity, setQuantity] = useState(7);
   const [speed, setSpeed] = useState(1100);
+  const [showModal, setShowModal] = useState(true);
+
+  setTimeout(() => setShowModal(false), 8000);
 
   const colors = [
     '#FFFFFF',
@@ -28,6 +32,8 @@ const App: React.FC = () => {
     '#00FFFF',
   ];
 
+  const lights = [];
+
   function getRandomColor() {
     const color = colors[Math.floor(Math.random() * colors.length)];
 
@@ -39,8 +45,6 @@ const App: React.FC = () => {
       setActive(!active);
     }, speed);
   }, [active, speed]);
-
-  const lights = [];
 
   for (let i = 0; i < quantity; i++) {
     if (i % 2 === 0) {
@@ -92,6 +96,7 @@ const App: React.FC = () => {
         <OnOff active={animate} onClick={() => setAnimate(!animate)} />
         <SpeedButton setSpeed={setSpeed} />
       </Controls>
+      <Modal showModal={showModal} setModal={setShowModal} />
     </Container>
   );
 };
