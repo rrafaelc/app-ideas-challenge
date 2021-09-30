@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <title>CauseEffect</title>
+  </head>
+  <body onload="load()">
+    <main>
+      <section id="info">
+        <h1 id="infoName">Choose one person on the list</h1>
+        <div>
+          <div>
+            <span>Address</span>
+            <p id="infoAddress1">-----------</p>
+            <p id="infoAddress2">-----------</p>
+          </div>
+          <div>
+            <span>State</span>
+            <p id="infoState">-----------</p>
+          </div>
+          <div>
+            <span>Country</span>
+            <p id="infoCountry">-----------</p>
+          </div>
+        </div>
+
+        <div>
+          <span>Telephone</span>
+          <p id="infoTelephone">-----------</p>
+        </div>
+        <div>
+          <span>Birthday</span>
+          <p id="infoBirthday">-----------</p>
+        </div>
+      </section>
+
+      <aside id="sidebar">
+        <h1>Summary of Persons</h1>
+
+        <section>
+          <ul></ul>
+        </section>
+      </aside>
+    </main>
+
+    <button id="darkLight">
+      <i class="indicator"></i>
+    </button>
+    <script src="scripts.js" defer></script>
+  </body>
+</html>
