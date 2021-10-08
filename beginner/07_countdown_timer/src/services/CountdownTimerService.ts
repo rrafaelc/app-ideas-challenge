@@ -21,7 +21,7 @@ export default class CountdownTimer {
   create({ name, date }: Omit<DateProps, 'id'>): DateProps {
     const createDate: DateProps = {
       id: `${'_' + Math.random().toString(36).substr(2, 9)}`,
-      name,
+      name: name ? name : `Timer ${Math.random().toString(36).substr(2, 4)}`,
       date,
     };
 

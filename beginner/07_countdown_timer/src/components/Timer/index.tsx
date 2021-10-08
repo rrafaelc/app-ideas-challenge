@@ -14,8 +14,13 @@ const Timer: React.FC<TimerProps> = ({ name, date, onClick }) => {
   const [minutes, setMinutes] = useState('0');
   const [hours, setHours] = useState('0');
   const [days, setDays] = useState('0');
+  const [playAudio, setPlayAudio] = useState(false);
 
   const futureDate = new Date(date).getTime();
+
+  const audio = new Audio('/assets/Music_Box.mp3');
+
+  playAudio && audio.play();
 
   function msToTime(t: number) {
     const ms = t % 1000;
@@ -41,6 +46,7 @@ const Timer: React.FC<TimerProps> = ({ name, date, onClick }) => {
     }, 1000);
 
     if (time <= 0) {
+      setPlayAudio(true);
       clearInterval(id);
     }
 
@@ -49,14 +55,14 @@ const Timer: React.FC<TimerProps> = ({ name, date, onClick }) => {
 
   return (
     <Container>
-      <span>{name}</span>
+      <p className="name">{name}</p>
       <div className="timer">
         <div className="time">
-          <span>Day</span>
+          <span>Days</span>
           <div>{days}</div>
         </div>
         <div className="time">
-          <span>Hour</span>
+          <span>Hours</span>
           <div>{hours}</div>
         </div>
         <div className="time">
@@ -67,12 +73,11 @@ const Timer: React.FC<TimerProps> = ({ name, date, onClick }) => {
           <span>Seconds</span>
           <div>{seconds}</div>
         </div>
-
-        <button type="button" onClick={onClick}>
-          Delete
-        </button>
       </div>
-      <div className="futureDate">{new Date(futureDate).toLocaleString()}</div>
+      <div className="goal">{new Date(futureDate).toLocaleString()}</div>
+      <button type="button" onClick={onClick}>
+        Delete
+      </button>
     </Container>
   );
 };

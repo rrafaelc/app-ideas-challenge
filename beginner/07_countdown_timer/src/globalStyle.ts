@@ -11,11 +11,12 @@ const GlobalStyle = createGlobalStyle`
     }
 
     body {
-      background-color: #000;
-      color: #fff;
+      background-color: #161616;      
+      color: #fdfdfd;
 
       max-width: 1200px;
       margin: 0 auto;
+      padding: 0 20px;
     }
 
     button {

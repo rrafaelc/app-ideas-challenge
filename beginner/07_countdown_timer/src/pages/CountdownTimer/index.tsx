@@ -4,7 +4,7 @@ import CountdownTimerService from '../../services/CountdownTimerService';
 
 import Timer from '../../components/Timer';
 
-import { Container } from './styles';
+import { Container, Create } from './styles';
 
 interface DateProps {
   id: string;
@@ -17,7 +17,6 @@ const countdownTimer = new CountdownTimerService();
 const CountdownTimer: React.FC = () => {
   const nameRef = useRef<HTMLInputElement>(null);
   const dateRef = useRef<HTMLInputElement>(null);
-
   const [dates, setDates] = useState<DateProps[]>(() => {
     const date = countdownTimer.get();
     if (date.length > 0) {
@@ -26,6 +25,8 @@ const CountdownTimer: React.FC = () => {
       return [];
     }
   });
+  const [error, setError] = useState(false);
+  const [errorAnimation, setErrorAnimation] = useState(false);
 
   const validateDate = (d: string): boolean => {
     const date = Math.round(new Date(d).getTime() / 1000); // In seconds
@@ -34,9 +35,11 @@ const CountdownTimer: React.FC = () => {
     const difference = date - currentDate;
 
     if (difference >= 60) {
+      setError(false);
       return true;
     }
 
+    setError(true);
     return false;
   };
 
@@ -52,10 +55,11 @@ const CountdownTimer: React.FC = () => {
         });
 
         setDates([...dates, dateCreated]);
-
         return;
       }
 
+      setErrorAnimation(true);
+      setTimeout(() => setErrorAnimation(false), 1000);
       console.log('The date needs to be at least one minute ahead');
     }
   };
@@ -85,12 +89,30 @@ const CountdownTimer: React.FC = () => {
           />
         ))}
       </div>
-      <div>
-        <label htmlFor="countdown_name">Name</label>
-        <input name="countdown_name" ref={nameRef} />
-        <input type="datetime-local" ref={dateRef} />
-        <button onClick={handleCreateDate}>Create</button>
-      </div>
+
+      {error && (
+        <div className="messageError">
+          The date needs to be at least one minute ahead
+        </div>
+      )}
+
+      <Create className={errorAnimation ? 'errorAnimation' : ''}>
+        <label htmlFor="countdown_name" hidden>
+          Name
+        </label>
+        <input
+          name="countdown_name"
+          placeholder="Name Optional"
+          ref={nameRef}
+        />
+        <input
+          className={error ? 'error' : ''}
+          id="datetime"
+          type="datetime-local"
+          ref={dateRef}
+        />
+        <button onClick={handleCreateDate}>Start</button>
+      </Create>
     </Container>
   );
 };
