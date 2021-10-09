@@ -12,6 +12,14 @@ export const Container = styled.div`
 
   border-radius: 8px;
 
+  @media (max-width: 340px) {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 300px) {
+    font-size: 0.8rem;
+  }
+
   .name {
     color: #ffe3d8;
     font-weight: bold;
@@ -38,7 +46,6 @@ export const Container = styled.div`
     border-radius: 10px;
 
     background-color: #c70039;
-    /* font-weight: bold; */
     color: #fff;
 
     transition: background-color 0.2s;

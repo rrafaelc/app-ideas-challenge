@@ -16,13 +16,10 @@ export const Container = styled.div`
     text-align: center;
     margin: 30px 0 50px;
     display: flex;
+    justify-content: center;
 
     flex-wrap: wrap;
     gap: 30px;
-
-    @media (max-width: 600px) {
-      flex-direction: column;
-    }
   }
 `;
 
@@ -62,6 +59,19 @@ export const Create = styled.div`
 
   button:active {
     transform: scale(0.98);
+  }
+
+  .sound {
+    background-color: #423f3e;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #423f3ecc;
+    }
+
+    &.active {
+      background-color: #28a745;
+    }
   }
 
   &.errorAnimation {

@@ -1,7 +1,6 @@
-import React, { useRef, useState } from 'react';
-
+import React, { useEffect, useRef, useState } from 'react';
+import { FiVolumeX, FiVolume2 } from 'react-icons/fi';
 import CountdownTimerService from '../../services/CountdownTimerService';
-
 import Timer from '../../components/Timer';
 
 import { Container, Create } from './styles';
@@ -14,6 +13,8 @@ interface DateProps {
 
 const countdownTimer = new CountdownTimerService();
 
+const audio = new Audio('/assets/Music_Box.mp3');
+
 const CountdownTimer: React.FC = () => {
   const nameRef = useRef<HTMLInputElement>(null);
   const dateRef = useRef<HTMLInputElement>(null);
@@ -25,6 +26,7 @@ const CountdownTimer: React.FC = () => {
       return [];
     }
   });
+  const [enableSound, setEnableSound] = useState(false);
   const [error, setError] = useState(false);
   const [errorAnimation, setErrorAnimation] = useState(false);
 
@@ -77,6 +79,10 @@ const CountdownTimer: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    enableSound && audio.play();
+  }, [enableSound]);
+
   return (
     <Container>
       <div className="timers">
@@ -85,6 +91,7 @@ const CountdownTimer: React.FC = () => {
             key={date.id}
             name={date.name}
             date={date.date}
+            enabledSound={enableSound}
             onClick={() => handleDelete(date.id)}
           />
         ))}
@@ -100,6 +107,16 @@ const CountdownTimer: React.FC = () => {
         <label htmlFor="countdown_name" hidden>
           Name
         </label>
+        <button
+          onClick={() => setEnableSound(!enableSound)}
+          className={`sound ${enableSound ? 'active' : ''}`}
+        >
+          {enableSound ? (
+            <FiVolume2 color="#fff" size={24} />
+          ) : (
+            <FiVolumeX color="#fff" size={24} />
+          )}
+        </button>
         <input
           name="countdown_name"
           placeholder="Name Optional"
@@ -111,7 +128,9 @@ const CountdownTimer: React.FC = () => {
           type="datetime-local"
           ref={dateRef}
         />
-        <button onClick={handleCreateDate}>Start</button>
+        <button className="start" onClick={handleCreateDate}>
+          Start
+        </button>
       </Create>
     </Container>
   );

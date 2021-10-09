@@ -5,22 +5,20 @@ import { Container } from './styles';
 interface TimerProps {
   name: string;
   date: string;
+  enabledSound: boolean;
   onClick: () => void;
 }
 
-const Timer: React.FC<TimerProps> = ({ name, date, onClick }) => {
-  const [time, setTime] = useState(59);
+const audio = new Audio('/assets/Music_Box.mp3');
+
+const Timer: React.FC<TimerProps> = ({ name, date, enabledSound, onClick }) => {
+  const [time, setTime] = useState(1);
   const [seconds, setSeconds] = useState('0');
   const [minutes, setMinutes] = useState('0');
   const [hours, setHours] = useState('0');
   const [days, setDays] = useState('0');
-  const [playAudio, setPlayAudio] = useState(false);
 
   const futureDate = new Date(date).getTime();
-
-  const audio = new Audio('/assets/Music_Box.mp3');
-
-  playAudio && audio.play();
 
   function msToTime(t: number) {
     const ms = t % 1000;
@@ -45,13 +43,23 @@ const Timer: React.FC<TimerProps> = ({ name, date, onClick }) => {
       msToTime(time);
     }, 1000);
 
+    if (time >= 2 && time <= 2000) {
+      if (new Date(time).getSeconds() <= 1) {
+        if (time >= 0) {
+          if (enabledSound) {
+            audio.play();
+          }
+        }
+      }
+    }
+
     if (time <= 0) {
-      setPlayAudio(true);
+      setSeconds('00');
       clearInterval(id);
     }
 
     return () => clearInterval(id);
-  }, [futureDate, time]);
+  }, [futureDate, time, enabledSound]);
 
   return (
     <Container>
