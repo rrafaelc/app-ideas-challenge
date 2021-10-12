@@ -19,6 +19,8 @@ export const Container = styled.div`
     width: 500px;
     height: 400px;
 
+    padding: 8px 12px;
+
     font-size: 1rem;
     font-family: 'Courier New', Courier, monospace;
   }

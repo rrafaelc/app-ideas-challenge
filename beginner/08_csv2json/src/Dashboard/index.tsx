@@ -73,7 +73,13 @@ const Dashboard: React.FC = () => {
         </div>
         <div className="inputTextArea result">
           <span>{method ? 'JSON' : 'CSV'}</span>
-          <textarea name="result" id="result" readOnly value={result} />
+          <textarea
+            name="result"
+            id="result"
+            readOnly
+            value={result}
+            disabled={result ? false : true}
+          />
           <div className="buttons">
             <button type="button">Download</button>
             <button type="button" onClick={handleCopy}>
