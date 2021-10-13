@@ -8,6 +8,7 @@ const Dashboard: React.FC = () => {
   const [method, setMethod] = useState(true); // true:csv2json false:json2csv
   const [entry, setEntry] = useState('');
   const [result, setResult] = useState('');
+  const [showCopied, setShowCopied] = useState(true);
 
   const onChangeEntry = (e: FormEvent<HTMLTextAreaElement>) => {
     setEntry(e.currentTarget.value);
@@ -25,6 +26,8 @@ const Dashboard: React.FC = () => {
   const handleCopy = useCallback(() => {
     if (result) {
       navigator.clipboard.writeText(result);
+      setShowCopied(true);
+      setTimeout(() => setShowCopied(false), 1500);
     }
   }, [result]);
 
@@ -33,7 +36,7 @@ const Dashboard: React.FC = () => {
     setResult('');
   }, []);
 
-  const csv = `product,price,amount\nPen,1.50,4\nXbox Series X,399.00,1`;
+  const csv = `product,price,amount\nPen,1.50,4\nIphone,1399.00,1`;
 
   return (
     <Container>
@@ -82,8 +85,14 @@ const Dashboard: React.FC = () => {
           />
           <div className="buttons">
             <button type="button">Download</button>
-            <button type="button" onClick={handleCopy}>
+
+            <button
+              className={`copy ${showCopied ? 'active' : ''}`}
+              type="button"
+              onClick={handleCopy}
+            >
               Copy
+              <div className="tooltiptext">Copied!</div>
             </button>
           </div>
         </div>

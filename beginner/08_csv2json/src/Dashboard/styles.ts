@@ -84,6 +84,54 @@ export const Main = styled.main`
       button + button {
         margin-left: 50px;
       }
+
+      .copy {
+        position: relative;
+        width: 80px;
+        height: 30px;
+        border-radius: 12px;
+        background-color: #916bbf;
+        color: #fff;
+        transition: background-color 0.2s;
+
+        &:hover {
+          background-color: #916bbfcc;
+        }
+
+        &.active {
+          .tooltiptext {
+            visibility: visible;
+          }
+        }
+
+        // https://www.w3schools.com/css/css_tooltip.asp
+        .tooltiptext {
+          visibility: hidden;
+          width: 60px;
+          background-color: #fff;
+          color: #000;
+          text-align: center;
+          padding: 5px 0;
+          border-radius: 6px;
+
+          position: absolute;
+          z-index: 1;
+
+          top: 2px;
+          left: 110%;
+
+          &::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 100%;
+            margin-top: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent #fff transparent transparent;
+          }
+        }
+      }
     }
   }
 
