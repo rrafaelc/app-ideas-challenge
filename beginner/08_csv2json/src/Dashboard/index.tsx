@@ -8,7 +8,7 @@ const Dashboard: React.FC = () => {
   const [method, setMethod] = useState(true); // true:csv2json false:json2csv
   const [entry, setEntry] = useState('');
   const [result, setResult] = useState('');
-  const [showCopied, setShowCopied] = useState(true);
+  const [showCopied, setShowCopied] = useState(false);
 
   const onChangeEntry = (e: FormEvent<HTMLTextAreaElement>) => {
     setEntry(e.currentTarget.value);
