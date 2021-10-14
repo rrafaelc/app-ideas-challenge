@@ -2,6 +2,7 @@ import React, { FormEvent, useCallback, useEffect, useState } from 'react';
 import { FiRefreshCw, FiXCircle, FiChevronsRight } from 'react-icons/fi';
 import { plainTextCSV } from '../utils/parseCsvToJson';
 import { plainTextJSON } from '../utils/parseJsonToCsv';
+import { saveAs } from 'file-saver';
 
 import { Container, Main } from './styles';
 
@@ -41,6 +42,28 @@ const Dashboard: React.FC = () => {
     setResult('');
   }, []);
 
+  const handleUpload = async () => {
+    //
+  };
+  const handleDownload = async () => {
+    if (result) {
+      if (method) {
+        const blob = new Blob([result], {
+          type: 'application/json',
+        });
+        saveAs(blob, 'CSV2JSON.json');
+      } else {
+        const blob = new Blob([result], {
+          type: 'text/csv',
+          endings: 'transparent',
+          // File needs to be in crlf \r\n
+          // https://datatracker.ietf.org/doc/html/rfc4180
+        });
+        saveAs(blob, 'CSV2JSON.csv');
+      }
+    }
+  };
+
   const csv = `product,price,amount\nPen,1.50,4\nIphone,1399.00,1`;
   const json = `[
  {
@@ -62,7 +85,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <Container>
-      <h1>CSV2JSON2CSV</h1>
+      <h1>CSV2JSON2</h1>
       <Main>
         <div className="inputTextArea entry">
           <div className="methodAndClear">
@@ -90,7 +113,9 @@ const Dashboard: React.FC = () => {
             <button type="button" onClick={handleConvert}>
               Convert
             </button>
-            <button type="button">Upload a file</button>
+            <button type="button" onClick={handleUpload}>
+              Upload a file
+            </button>
           </div>
         </div>
         <div className="switch">
@@ -106,7 +131,9 @@ const Dashboard: React.FC = () => {
             disabled={result ? false : true}
           />
           <div className="buttons">
-            <button type="button">Download</button>
+            <button type="button" onClick={handleDownload}>
+              Download
+            </button>
 
             <button
               className={`copy ${showCopied ? 'active' : ''}`}

@@ -25,16 +25,38 @@ export const plainTextJSON = (text: string) => {
 
   for (let i = 0; i < titles.length; i++) {
     if (i === titles.length - 1) {
-      csv += `${titles[i]}\n`;
+      // Break lines needs to be in crlf format
+      // https://datatracker.ietf.org/doc/html/rfc4180
+      csv += `${titles[i]}\r\n`;
       break;
     }
 
     csv += `${titles[i]},`;
   }
 
+  // eslint error 'no-loop-func'
+  // Can not use a function inside a for in loop
+  // https://eslint.org/docs/rules/no-loop-func
+  // https://github.com/eslint/eslint/issues/5044
+  const incCsv = (text: string) => {
+    csv += text;
+  };
+
   for (let k in obj) {
-    csv += `${Object.values(obj[k])}\n`;
+    Object.values(obj[k]).forEach((val: string | number, index, array) => {
+      // Remove any line breaks of the string
+      const valParsed: string = val.toString().replace(/(\r\n|\n|\r)/gm, '');
+
+      if (index === array.length - 1) {
+        // This add manually a line break on the end of the string
+        incCsv(`${valParsed.trim()}\r\n`);
+        return;
+      }
+
+      incCsv(`${valParsed.trim()},`);
+    });
   }
+  console.log(csv);
 
   return csv;
 };
