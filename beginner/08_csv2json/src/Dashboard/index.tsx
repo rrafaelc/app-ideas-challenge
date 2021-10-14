@@ -1,6 +1,7 @@
-import React, { FormEvent, useCallback, useState } from 'react';
+import React, { FormEvent, useCallback, useEffect, useState } from 'react';
 import { FiRefreshCw, FiXCircle, FiChevronsRight } from 'react-icons/fi';
-import { plainText } from '../utils/parseCsvToJson';
+import { plainTextCSV } from '../utils/parseCsvToJson';
+import { plainTextJSON } from '../utils/parseJsonToCsv';
 
 import { Container, Main, Footer } from './styles';
 
@@ -20,7 +21,11 @@ const Dashboard: React.FC = () => {
     const entryParsed = entry.replace(/^\s*[\r\n]/gm, '');
 
     // Trim the textarea
-    setResult(plainText(entryParsed.trim()));
+    if (method) {
+      setResult(plainTextCSV(entryParsed.trim()));
+    } else {
+      setResult(plainTextJSON(entryParsed.trim()));
+    }
   };
 
   const handleCopy = useCallback(() => {
@@ -37,6 +42,23 @@ const Dashboard: React.FC = () => {
   }, []);
 
   const csv = `product,price,amount\nPen,1.50,4\nIphone,1399.00,1`;
+  const json = `[
+ {
+  "product": "Pen",
+  "price": 1.5,
+  "amount": 4
+ },
+ {
+  "product": "Iphone",
+  "price": 1399,
+  "amount": 1
+ }
+]`;
+
+  useEffect(() => {
+    setEntry('');
+    setResult('');
+  }, [method]);
 
   return (
     <Container>
@@ -60,7 +82,7 @@ const Dashboard: React.FC = () => {
           <textarea
             name="entry"
             id="entry"
-            placeholder={csv}
+            placeholder={method ? csv : json}
             onChange={onChangeEntry}
             value={entry}
           />
