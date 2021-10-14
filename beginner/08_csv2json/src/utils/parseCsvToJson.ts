@@ -9,7 +9,7 @@ const checkValue = (value: string) => {
   }
 };
 
-export const plainText = (text: string) => {
+export const plainTextCSV = (text: string) => {
   const jsonArray: any = [];
 
   const lines = text.split('\n');
