@@ -1,4 +1,11 @@
-import React, { FormEvent, useCallback, useEffect, useState } from 'react';
+import React, {
+  ChangeEvent,
+  FormEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { FiRefreshCw, FiXCircle, FiChevronsRight } from 'react-icons/fi';
 import { plainTextCSV } from '../utils/parseCsvToJson';
 import { plainTextJSON } from '../utils/parseJsonToCsv';
@@ -7,9 +14,11 @@ import { saveAs } from 'file-saver';
 import { Container, Main } from './styles';
 
 const Dashboard: React.FC = () => {
+  const inputFileRef = useRef<HTMLInputElement>(null);
   const [method, setMethod] = useState(true); // true:csv2json false:json2csv
   const [entry, setEntry] = useState('');
   const [result, setResult] = useState('');
+  const [filename, setFilename] = useState<string | undefined>(undefined);
   const [showCopied, setShowCopied] = useState(false);
 
   const onChangeEntry = (e: FormEvent<HTMLTextAreaElement>) => {
@@ -42,16 +51,49 @@ const Dashboard: React.FC = () => {
     setResult('');
   }, []);
 
-  const handleUpload = async () => {
-    //
+  const handleUploadFile = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.currentTarget.files && event.currentTarget.files[0];
+    if (file) {
+      if (method) {
+        if (file.type !== 'text/csv') {
+          alert('The file extension needs to be csv');
+          return;
+        }
+
+        const text = await file.text();
+        const textParsed = text.replace(/"/gim, '');
+        setEntry(textParsed);
+        setResult(plainTextCSV(textParsed.trim()));
+        setFilename(file.name.split('.')[0]);
+      } else {
+        if (file.type !== 'application/json') {
+          alert('The file extension needs to be json');
+          return;
+        }
+
+        const text = await file.text();
+        setEntry(text);
+        setResult(plainTextJSON(text.trim()));
+        setFilename(file.name.split('.')[0]);
+      }
+    } else {
+      setFilename(undefined);
+    }
   };
-  const handleDownload = async () => {
+
+  const handleUpload = () => {
+    if (inputFileRef.current) {
+      inputFileRef.current.click();
+    }
+  };
+
+  const handleDownload = () => {
     if (result) {
       if (method) {
         const blob = new Blob([result], {
           type: 'application/json',
         });
-        saveAs(blob, 'CSV2JSON.json');
+        saveAs(blob, `${filename ? filename : 'CSV2JSON'}.json`);
       } else {
         const blob = new Blob([result], {
           type: 'text/csv',
@@ -59,7 +101,7 @@ const Dashboard: React.FC = () => {
           // File needs to be in crlf \r\n
           // https://datatracker.ietf.org/doc/html/rfc4180
         });
-        saveAs(blob, 'CSV2JSON.csv');
+        saveAs(blob, `${filename ? filename : 'CSV2JSON'}.csv`);
       }
     }
   };
@@ -114,6 +156,14 @@ const Dashboard: React.FC = () => {
               Convert
             </button>
             <button type="button" onClick={handleUpload}>
+              <input
+                type="file"
+                name="inputFile"
+                onChange={handleUploadFile}
+                ref={inputFileRef}
+                accept={method ? '.csv' : '.json'}
+                style={{ display: 'none' }}
+              />
               Upload a file
             </button>
           </div>
