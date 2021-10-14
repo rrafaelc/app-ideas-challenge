@@ -45,6 +45,7 @@ export const plainTextJSON = (text: string) => {
   for (let k in obj) {
     Object.values(obj[k]).forEach((val: string | number, index, array) => {
       // Remove any line breaks of the string
+
       const valParsed: string = val.toString().replace(/(\r\n|\n|\r)/gm, '');
 
       if (index === array.length - 1) {
@@ -56,7 +57,8 @@ export const plainTextJSON = (text: string) => {
       incCsv(`${valParsed.trim()},`);
     });
   }
-  console.log(csv);
 
+  // To make sure this css is valid
+  // https://csvlint.io/
   return csv;
 };
