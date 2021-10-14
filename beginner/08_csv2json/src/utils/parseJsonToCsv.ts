@@ -1,6 +1,17 @@
+let jsonValid = false;
+
 const isJson = (text: string) => {
+  const isNested = (obj: any) =>
+    Object.keys(obj).some(function (key) {
+      return obj[key] && typeof obj[key] === 'object';
+    });
+
   try {
-    JSON.parse(text);
+    const obj = JSON.parse(text);
+    if (isNested(obj)) {
+      jsonValid = true;
+      return false;
+    }
     return true;
   } catch {
     return false;
@@ -9,6 +20,9 @@ const isJson = (text: string) => {
 
 export const plainTextJSON = (text: string) => {
   if (!isJson(text)) {
+    if (jsonValid) {
+      return 'Nested JSON structures are not supported.';
+    }
     return 'This is not a valid json.';
   }
 
