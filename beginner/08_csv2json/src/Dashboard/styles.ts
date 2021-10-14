@@ -29,6 +29,7 @@ export const Container = styled.div`
 export const Main = styled.main`
   display: flex;
   gap: 20px;
+  margin-bottom: 60px;
 
   .methodAndClear {
     display: flex;
@@ -142,12 +143,4 @@ export const Main = styled.main`
       align-items: flex-end;
     }
   }
-`;
-
-export const Footer = styled.div`
-  width: 100%;
-  margin-top: 60px;
-
-  display: flex;
-  justify-content: center;
 `;

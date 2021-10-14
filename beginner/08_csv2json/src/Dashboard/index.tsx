@@ -3,7 +3,7 @@ import { FiRefreshCw, FiXCircle, FiChevronsRight } from 'react-icons/fi';
 import { plainTextCSV } from '../utils/parseCsvToJson';
 import { plainTextJSON } from '../utils/parseJsonToCsv';
 
-import { Container, Main, Footer } from './styles';
+import { Container, Main } from './styles';
 
 const Dashboard: React.FC = () => {
   const [method, setMethod] = useState(true); // true:csv2json false:json2csv
@@ -119,9 +119,6 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
       </Main>
-      <Footer>
-        <p>Made by rrafaelc</p>
-      </Footer>
     </Container>
   );
 };
