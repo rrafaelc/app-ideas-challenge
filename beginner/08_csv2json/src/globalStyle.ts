@@ -15,7 +15,7 @@ const Global = createGlobalStyle`
   }
 
   body {
-    background-color: #1b1b1b;
+    background-color: #222831;
     color: #fff;
 
     max-width: 1200px;
