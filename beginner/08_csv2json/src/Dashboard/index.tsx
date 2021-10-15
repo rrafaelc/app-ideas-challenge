@@ -147,7 +147,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <Container>
-      <h1>CSV2JSON2</h1>
+      <h1>CSV2JSON</h1>
       <Main>
         <div className="inputTextArea entry">
           <div className="methodAndClear">
