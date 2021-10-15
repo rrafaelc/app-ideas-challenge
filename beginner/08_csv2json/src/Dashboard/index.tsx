@@ -20,6 +20,7 @@ const Dashboard: React.FC = () => {
   const [result, setResult] = useState('');
   const [filename, setFilename] = useState<string | undefined>(undefined);
   const [showCopied, setShowCopied] = useState(false);
+  const [converting, setConverting] = useState(false);
 
   const onChangeEntry = (e: FormEvent<HTMLTextAreaElement>) => {
     setEntry(e.currentTarget.value);
@@ -31,6 +32,7 @@ const Dashboard: React.FC = () => {
     const entryParsed = entry.replace(/^\s*[\r\n]/gm, '');
 
     // Trim the textarea
+    setConverting(true);
     if (method) {
       setResult(plainTextCSV(entryParsed.trim()));
     } else {
@@ -52,11 +54,16 @@ const Dashboard: React.FC = () => {
   }, []);
 
   const handleUploadFile = async (event: ChangeEvent<HTMLInputElement>) => {
+    setConverting(true);
     const file = event.currentTarget.files && event.currentTarget.files[0];
     if (file) {
       if (method) {
         if (file.type !== 'text/csv') {
           alert('The file extension needs to be csv');
+          setConverting(false);
+          if (inputFileRef.current) {
+            inputFileRef.current.value = '';
+          }
           return;
         }
 
@@ -68,6 +75,10 @@ const Dashboard: React.FC = () => {
       } else {
         if (file.type !== 'application/json') {
           alert('The file extension needs to be json');
+          setConverting(false);
+          if (inputFileRef.current) {
+            inputFileRef.current.value = '';
+          }
           return;
         }
 
@@ -78,6 +89,10 @@ const Dashboard: React.FC = () => {
       }
     } else {
       setFilename(undefined);
+    }
+
+    if (inputFileRef.current) {
+      inputFileRef.current.value = '';
     }
   };
 
@@ -125,6 +140,12 @@ const Dashboard: React.FC = () => {
     setResult('');
   }, [method]);
 
+  useEffect(() => {
+    if (result) {
+      setConverting(false);
+    }
+  }, [result, converting]);
+
   return (
     <Container>
       <h1>CSV2JSON2</h1>
@@ -152,10 +173,10 @@ const Dashboard: React.FC = () => {
             value={entry}
           />
           <div className="buttons">
-            <button type="button" onClick={handleConvert}>
+            <button type="button" onClick={handleConvert} disabled={converting}>
               Convert
             </button>
-            <button type="button" onClick={handleUpload}>
+            <button type="button" onClick={handleUpload} disabled={converting}>
               <input
                 type="file"
                 name="inputFile"
@@ -168,7 +189,7 @@ const Dashboard: React.FC = () => {
             </button>
           </div>
         </div>
-        <div className="switch">
+        <div className="arrow">
           <FiChevronsRight color="#fff" size={24} />
         </div>
         <div className="inputTextArea result">
