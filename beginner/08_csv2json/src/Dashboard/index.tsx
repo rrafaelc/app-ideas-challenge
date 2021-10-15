@@ -11,7 +11,14 @@ import { plainTextCSV } from '../utils/parseCsvToJson';
 import { plainTextJSON } from '../utils/parseJsonToCsv';
 import { saveAs } from 'file-saver';
 
-import { Container, Main } from './styles';
+import {
+  Container,
+  Main,
+  MethodAndClearAll,
+  MethodAndClearButton,
+  BoxArea,
+  Button,
+} from './styles';
 
 const Dashboard: React.FC = () => {
   const inputFileRef = useRef<HTMLInputElement>(null);
@@ -126,8 +133,8 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  const csv = `product,price,amount\nPen,1.50,4\nIphone,1399.00,1`;
-  const json = `[
+  const csv = `Paste or Upload csv here\n\nproduct,price,amount\nPen,1.50,4\nIphone,1399.00,1`;
+  const json = `Paste or Upload json here\n\n[
  {
   "product": "Pen",
   "price": 1.5,
@@ -140,6 +147,7 @@ const Dashboard: React.FC = () => {
  }
 ]`;
 
+  // If the user change the method
   useEffect(() => {
     setEntry('');
     setResult('');
@@ -147,23 +155,26 @@ const Dashboard: React.FC = () => {
 
   return (
     <Container>
-      <h1>CSV2JSON</h1>
       <Main>
-        <div className="inputTextArea entry">
-          <div className="methodAndClear">
-            <button
-              type="button"
+        <BoxArea>
+          <MethodAndClearAll>
+            <MethodAndClearButton
               className="method"
               onClick={() => setMethod(!method)}
             >
-              <FiRefreshCw className="icon" color="#fff" size={16} />
-              {method ? 'CSV' : 'JSON'}
-            </button>
-            <button type="button" className="clearAll" onClick={handleClearAll}>
-              Clear All
-              <FiXCircle color="#000" size={20} />
-            </button>
-          </div>
+              <div className="method">
+                <FiRefreshCw color="#fff" size={16} />
+                <span>{method ? 'CSV' : 'JSON'}</span>
+              </div>
+            </MethodAndClearButton>
+            <MethodAndClearButton className="clearAll" onClick={handleClearAll}>
+              <div className="clear">
+                <span>Clear All</span>
+                <FiXCircle color="#fff" size={20} />
+              </div>
+            </MethodAndClearButton>
+          </MethodAndClearAll>
+
           <textarea
             name="entry"
             id="entry"
@@ -171,11 +182,22 @@ const Dashboard: React.FC = () => {
             onChange={onChangeEntry}
             value={entry}
           />
+
           <div className="buttons">
-            <button type="button" onClick={handleConvert} disabled={converting}>
+            <Button
+              className="convert"
+              onClick={handleConvert}
+              disabled={converting}
+              color="#4E9F3D"
+            >
               Convert
-            </button>
-            <button type="button" onClick={handleUpload} disabled={converting}>
+            </Button>
+            <Button
+              className="upload"
+              onClick={handleUpload}
+              disabled={converting}
+              color="#4E9F3D"
+            >
               <input
                 type="file"
                 name="inputFile"
@@ -185,14 +207,16 @@ const Dashboard: React.FC = () => {
                 style={{ display: 'none' }}
               />
               Upload a file
-            </button>
+            </Button>
           </div>
-        </div>
-        <div className="arrow">
-          <FiChevronsRight color="#fff" size={24} />
-        </div>
-        <div className="inputTextArea result">
-          <span>{method ? 'JSON' : 'CSV'}</span>
+        </BoxArea>
+
+        <FiChevronsRight className="arrow" color="#fff" size={24} />
+
+        <BoxArea>
+          <div className="resultText">
+            <span>{method ? 'JSON' : 'CSV'}</span>
+          </div>
           <textarea
             name="result"
             id="result"
@@ -201,20 +225,19 @@ const Dashboard: React.FC = () => {
             disabled={result ? false : true}
           />
           <div className="buttons">
-            <button type="button" onClick={handleDownload}>
+            <Button className="download" onClick={handleDownload}>
               Download
-            </button>
+            </Button>
 
-            <button
+            <Button
               className={`copy ${showCopied ? 'active' : ''}`}
-              type="button"
               onClick={handleCopy}
             >
               Copy
               <div className="tooltiptext">Copied!</div>
-            </button>
+            </Button>
           </div>
-        </div>
+        </BoxArea>
       </Main>
     </Container>
   );
