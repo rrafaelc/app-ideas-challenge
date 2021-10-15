@@ -68,12 +68,8 @@ export const Main = styled.main`
     }
   }
 
-  .switch {
+  .arrow {
     align-self: center;
-
-    button {
-      background-color: transparent;
-    }
   }
 
   .inputTextArea {
