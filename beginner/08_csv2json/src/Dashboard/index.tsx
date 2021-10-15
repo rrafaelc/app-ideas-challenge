@@ -32,7 +32,6 @@ const Dashboard: React.FC = () => {
 
     const entryParsed = entry.replace(/^\s*[\r\n]/gm, '');
 
-    // Trim the textarea
     setConverting(true);
     setFilename(undefined);
     if (method) {
@@ -64,32 +63,30 @@ const Dashboard: React.FC = () => {
       if (method) {
         if (file.type !== 'text/csv') {
           alert('The file extension needs to be csv');
+
           setConverting(false);
-
           inputFileRef.current!.value = '';
-
-          return;
-        }
-
-        const text = await file.text();
-
-        const textParsed = text.replace(/"/gim, '');
-        setEntry(textParsed);
-        setResult(plainTextCSV(textParsed.trim()));
-        setFilename(file.name.split('.')[0]);
-        setConverting(false);
-      } else {
-        if (file.type !== 'application/json') {
-          alert('The file extension needs to be json');
-          setConverting(false);
-
-          inputFileRef.current!.value = '';
-
           return;
         }
 
         const text = await file.text();
         setEntry(text);
+
+        setResult(plainTextCSV(text.trim()));
+        setFilename(file.name.split('.')[0]);
+        setConverting(false);
+      } else {
+        if (file.type !== 'application/json') {
+          alert('The file extension needs to be json');
+
+          setConverting(false);
+          inputFileRef.current!.value = '';
+          return;
+        }
+
+        const text = await file.text();
+        setEntry(text);
+
         setResult(plainTextJSON(text.trim()));
         setFilename(file.name.split('.')[0]);
         setConverting(false);
