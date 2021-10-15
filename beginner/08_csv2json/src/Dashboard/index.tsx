@@ -29,15 +29,19 @@ const Dashboard: React.FC = () => {
   const handleConvert = () => {
     // Remove all empty lines between break lines
     // https://stackoverflow.com/questions/16369642/javascript-how-to-use-a-regular-expression-to-remove-blank-lines-from-a-string
+
     const entryParsed = entry.replace(/^\s*[\r\n]/gm, '');
 
     // Trim the textarea
     setConverting(true);
+    setFilename(undefined);
     if (method) {
       setResult(plainTextCSV(entryParsed.trim()));
     } else {
       setResult(plainTextJSON(entryParsed.trim()));
     }
+
+    setConverting(false);
   };
 
   const handleCopy = useCallback(() => {
@@ -61,24 +65,26 @@ const Dashboard: React.FC = () => {
         if (file.type !== 'text/csv') {
           alert('The file extension needs to be csv');
           setConverting(false);
-          if (inputFileRef.current) {
-            inputFileRef.current.value = '';
-          }
+
+          inputFileRef.current!.value = '';
+
           return;
         }
 
         const text = await file.text();
+
         const textParsed = text.replace(/"/gim, '');
         setEntry(textParsed);
         setResult(plainTextCSV(textParsed.trim()));
         setFilename(file.name.split('.')[0]);
+        setConverting(false);
       } else {
         if (file.type !== 'application/json') {
           alert('The file extension needs to be json');
           setConverting(false);
-          if (inputFileRef.current) {
-            inputFileRef.current.value = '';
-          }
+
+          inputFileRef.current!.value = '';
+
           return;
         }
 
@@ -86,9 +92,11 @@ const Dashboard: React.FC = () => {
         setEntry(text);
         setResult(plainTextJSON(text.trim()));
         setFilename(file.name.split('.')[0]);
+        setConverting(false);
       }
     } else {
       setFilename(undefined);
+      setConverting(false);
     }
 
     if (inputFileRef.current) {
@@ -139,12 +147,6 @@ const Dashboard: React.FC = () => {
     setEntry('');
     setResult('');
   }, [method]);
-
-  useEffect(() => {
-    if (result) {
-      setConverting(false);
-    }
-  }, [result, converting]);
 
   return (
     <Container>
