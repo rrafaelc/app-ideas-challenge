@@ -66,7 +66,15 @@ const Dashboard: React.FC = () => {
   const handleUploadFile = async (event: ChangeEvent<HTMLInputElement>) => {
     setConverting(true);
     const file = event.currentTarget.files && event.currentTarget.files[0];
+
     if (file) {
+      const filesize = file.size / 1024; // 1MB
+      if (filesize > 1024) {
+        alert('File is too big, maximium 1MB');
+        setConverting(false);
+        return;
+      }
+
       if (method) {
         if (file.type !== 'text/csv') {
           alert('The file extension needs to be csv');
