@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Dollars To Cents</title>
+  </head>
+  <body>
+    <h1>Dollar To Cents</h1>
+    <main>
+      <div class="convert">
+        <label for="inputConvert">Enter the number of dollars</label>
+        <input type="number" name="inputConvert" id="inputConvert" />
+        <button type="button" id="convertButton">Convert</button>
+      </div>
+      <div id="result">
+        <p class="totalCents">Total cents: 0</p>
+        <table>
+          <tbody>
+            <tr>
+              <td>Coins</td>
+              <td>Count</td>
+            </tr>
+            <tr>
+              <td>Quartes (25 ¢)</td>
+              <td id="quartes">0</td>
+            </tr>
+            <tr>
+              <td>Dimes (10 ¢)</td>
+              <td id="dimes">0</td>
+            </tr>
+            <tr>
+              <td>Nickels (5 ¢)</td>
+              <td id="nickels">0</td>
+            </tr>
+            <tr>
+              <td>Pennies (1 ¢)</td>
+              <td id="pennies">0</td>
+            </tr>
+          </tbod>
+        </table>
+      </div>
+    </main>
+    <script src="script.js" defer></script>
+  </body>
+</html>
