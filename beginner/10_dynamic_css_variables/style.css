@@ -1,0 +1,129 @@
+:root {
+  --input-id-bg-color: #fff;
+  --input-pw-bg-color: #fff;
+
+  --input-border-color: #6b6b6b;
+
+  --input-font-style: normal;
+  --input-color: #000;
+}
+
+body {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+h1 {
+  padding: 25px 0;
+  text-align: center;
+}
+
+form {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+
+  background-color: #fcf8e8;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputs label {
+  padding-bottom: 5px;
+  font-weight: bold;
+}
+
+.inputs label:nth-of-type(2) {
+  padding-top: 10px;
+}
+
+.inputs input {
+  font-size: 1.2rem;
+  font-style: var(--input-font-style);
+  color: var(--input-color);
+
+  padding: 2px;
+  padding-left: 5px;
+
+  border: 2px solid var(--input-border-color);
+  border-radius: 6px;
+  transition: box-shadow 0.2s;
+}
+
+#userid {
+  background-color: var(--input-id-bg-color);
+}
+#password {
+  background-color: var(--input-pw-bg-color);
+}
+
+.inputs input:focus {
+  box-shadow: 0 0 3px 2px cornflowerblue;
+}
+
+.buttons {
+  padding-top: 20px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttons button {
+  width: 40%;
+  padding: 10px 0;
+
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #fff;
+
+  border-radius: 6px;
+  transition: 0.2s;
+}
+
+.buttons button:active {
+  transform: scale(0.95);
+}
+
+#login-btn {
+  background-color: #113cfc;
+}
+
+#cancel-btn {
+  background-color: #ff2442;
+}
+
+#login-btn:hover {
+  background-color: #0e30ca;
+}
+
+#cancel-btn:hover {
+  background-color: #cc1d35;
+}
+
+.info {
+  text-align: center;
+  padding-top: 30px;
+  font-weight: bold;
+}
+
+.success {
+  display: none;
+  color: #113cfc;
+}
+
+.error,
+.empty {
+  display: none;
+  color: #ff2442;
+}
+
+.success.active,
+.error.active,
+.empty.active {
+  display: block;
+}
