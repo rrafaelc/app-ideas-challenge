@@ -1,10 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+
+import App from './App';
+
+import GlobalStyle from './style';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <h1>Start</h1>
-  </React.StrictMode>,
-  document.getElementById('root'),
+	<React.StrictMode>
+		<App />
+		<GlobalStyle />
+	</React.StrictMode>,
+	document.getElementById('root'),
 );
