@@ -1,16 +1,28 @@
-import { Container, Header, Main, Footer } from './style';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+
+import { Container, Main, LeftCenter, RightCenter } from './style';
 
 const App = () => {
-	if (!indexedDB) {
+	// eslint-disable-next-line
+	if (true) {
 		//
 	}
 
 	return (
-		<Container>
-			<Header>indexedDB App</Header>
-			<Main>App</Main>
-			<Footer />
-		</Container>
+		<>
+			<Header />
+			<Container>
+				<Main>
+					<LeftCenter>
+						<div className='result'>Result</div>
+						<div className='controls'>Controls</div>
+					</LeftCenter>
+					<RightCenter>Execution details</RightCenter>
+				</Main>
+				<Footer />
+			</Container>
+		</>
 	);
 };
 

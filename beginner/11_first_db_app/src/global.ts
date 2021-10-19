@@ -1,6 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+  :root {
+  // https://stackoverflow.com/questions/67601508/why-do-my-styled-component-keyframes-error-with-ts-styled-plugin9999-in-react
+  ${`color-scheme: dark`}
+}
+
   * {
     margin: 0;
     padding: 0;
