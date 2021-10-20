@@ -1,6 +1,7 @@
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import Result from '../components/Result';
+import Header from '../../components/Header';
+import Result from '../../components/Result';
+import Controls from '../../components/Controls';
+import Footer from '../../components/Footer';
 
 import { Container, Main, LeftCenter, RightCenter } from './style';
 
@@ -17,7 +18,7 @@ const App = () => {
 				<Main>
 					<LeftCenter>
 						<Result />
-						<div className='controls'>Controls</div>
+						<Controls />
 					</LeftCenter>
 					<RightCenter>Execution details</RightCenter>
 				</Main>

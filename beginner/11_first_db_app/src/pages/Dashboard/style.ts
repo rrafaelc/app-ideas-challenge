@@ -21,16 +21,6 @@ export const Main = styled.main`
 export const LeftCenter = styled.div`
 	margin-right: 20px;
 	width: 684px;
-
-	.controls {
-		margin-top: 20px;
-		height: 148px;
-		background: #323232;
-
-		outline: 1px solid #323232;
-		border-radius: 5px;
-		box-shadow: 5px 5px 10px 0 #000;
-	}
 `;
 
 export const RightCenter = styled.div`
