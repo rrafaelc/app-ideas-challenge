@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './App';
+import Dashboard from './pages/Dashboard';
 
 import GlobalStyle from './global';
 
 ReactDOM.render(
 	<React.StrictMode>
-		<App />
+		<Dashboard />
 		<GlobalStyle />
 	</React.StrictMode>,
 	document.getElementById('root'),
