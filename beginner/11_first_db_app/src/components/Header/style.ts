@@ -22,9 +22,15 @@ export const Container = styled.div`
 	}
 
 	.icons {
+		display: flex;
+		align-items: center;
+
 		svg {
 			fill: #dcdcdc;
 			font-size: 30px;
+
+			display: flex;
+			align-items: center;
 
 			transition: fill 0.2s;
 		}
