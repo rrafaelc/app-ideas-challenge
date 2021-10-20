@@ -28,7 +28,6 @@ export const RightCenter = styled.div`
 	height: 536px;
 	background: #323232;
 
-	outline: 1px solid #323232;
 	border-radius: 5px;
 	box-shadow: 5px 5px 10px 0 #000;
 `;
