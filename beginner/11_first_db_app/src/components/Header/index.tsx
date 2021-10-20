@@ -1,5 +1,4 @@
-import { FaGithubAlt } from 'react-icons/fa';
-import { BiBell } from 'react-icons/bi';
+import { FaGithubAlt, FaBell } from 'react-icons/fa';
 
 import { Header, Container } from './style';
 
@@ -17,7 +16,7 @@ export default () => (
 					<FaGithubAlt />
 				</a>
 				<button type='button' title='Notification panel'>
-					<BiBell />
+					<FaBell />
 				</button>
 			</div>
 		</Container>
