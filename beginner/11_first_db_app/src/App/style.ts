@@ -22,15 +22,14 @@ export const LeftCenter = styled.div`
 	margin-right: 20px;
 	width: 684px;
 
-	.result {
-		height: 368px;
-		background: #323232;
-	}
-
 	.controls {
 		margin-top: 20px;
 		height: 148px;
 		background: #323232;
+
+		outline: 1px solid #323232;
+		border-radius: 5px;
+		box-shadow: 5px 5px 10px 0 #000;
 	}
 `;
 
@@ -38,4 +37,8 @@ export const RightCenter = styled.div`
 	width: 375px;
 	height: 536px;
 	background: #323232;
+
+	outline: 1px solid #323232;
+	border-radius: 5px;
+	box-shadow: 5px 5px 10px 0 #000;
 `;

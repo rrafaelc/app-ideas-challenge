@@ -1,5 +1,6 @@
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import Result from '../components/Result';
 
 import { Container, Main, LeftCenter, RightCenter } from './style';
 
@@ -15,7 +16,7 @@ const App = () => {
 			<Container>
 				<Main>
 					<LeftCenter>
-						<div className='result'>Result</div>
+						<Result />
 						<div className='controls'>Controls</div>
 					</LeftCenter>
 					<RightCenter>Execution details</RightCenter>
