@@ -14,9 +14,12 @@ export const Container = styled.div`
 		background-color: #0b0a0a;
 		border-radius: 5px;
 		padding: 20px 10px;
+
+		overflow: auto;
 		/* visibility: hidden; */
 
 		table {
+			margin: 0 auto;
 			border-collapse: collapse;
 			text-align: center;
 			font-size: 12px;
@@ -36,7 +39,7 @@ export const Container = styled.div`
 				padding: 2px 29px;
 			}
 			.sales {
-				padding: 2px 28px;
+				padding: 2px 15px;
 			}
 			.norows {
 				padding: 2px 12px;
