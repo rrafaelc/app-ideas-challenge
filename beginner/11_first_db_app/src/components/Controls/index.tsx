@@ -3,6 +3,7 @@ import Button from './Button';
 
 import { Container } from './style';
 
+// https://stackoverflow.com/questions/56028635/passing-usestate-as-props-in-typescript/61857023#61857023
 type Dispatcher<S> = Dispatch<SetStateAction<S>>;
 interface ControlsProps {
 	setButtonClicked: Dispatcher<string>;
