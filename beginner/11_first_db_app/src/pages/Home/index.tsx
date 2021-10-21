@@ -14,9 +14,14 @@ interface LogProps {
 	type: 'normal' | 'function' | 'error';
 }
 
+interface NotificationProps {
+	msg: string;
+}
+
 const App = () => {
 	const [buttonClicked, setButtonClicked] = useState('');
 	const [logs, setLogs] = useState<LogProps[]>([]);
+	const [notifications, setNotifications] = useState<NotificationProps[]>([]);
 
 	const sendLog = () => {
 		const log: LogProps = {
@@ -27,10 +32,18 @@ const App = () => {
 		setLogs([...logs, log]);
 	};
 
+	const sendNotification = () => {
+		const notification: NotificationProps = {
+			msg: 'Load DB Starts',
+		};
+		setNotifications([...notifications, notification]);
+	};
+
 	useEffect(() => {
 		// Test temporary
 		if (buttonClicked) {
 			sendLog();
+			sendNotification();
 			setButtonClicked('');
 		}
 	}, [buttonClicked]);

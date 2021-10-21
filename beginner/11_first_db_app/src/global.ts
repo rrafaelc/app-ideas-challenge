@@ -18,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     background: #212121;
     color: #fff;
+    overflow-x: hidden;
   }
 
   button {

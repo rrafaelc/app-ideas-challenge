@@ -6,6 +6,8 @@ export const Header = styled.header`
 `;
 
 export const Container = styled.div`
+	position: relative;
+
 	max-width: 1320px;
 
 	margin: 0 auto;
@@ -43,5 +45,28 @@ export const Container = styled.div`
 			margin-left: 40px;
 			background-color: transparent;
 		}
+	}
+`;
+
+export const Panel = styled.div`
+	width: 0;
+	height: 388px;
+	border-radius: 6px;
+	background: #323232;
+
+	position: absolute;
+	top: 56px;
+	right: 10px;
+
+	transform: translateX(30vw);
+	opacity: 0;
+	overflow-y: auto;
+
+	transition: all 0.5s;
+
+	&.active {
+		width: 208px;
+		opacity: 1;
+		transform: translateX(0px);
 	}
 `;
