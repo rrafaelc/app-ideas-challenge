@@ -37,6 +37,7 @@ export const Log = styled.div`
 	gap: 10px;
 
 	.date {
+		align-self: flex-end;
 		color: #bebebe;
 	}
 
