@@ -36,6 +36,12 @@ export const Log = styled.div`
 	display: flex;
 	gap: 10px;
 
+	// https://stackoverflow.com/a/59423258
+	// for msg => p + p
+	p + p {
+		word-break: break-all;
+	}
+
 	.date {
 		align-self: flex-end;
 		color: #bebebe;
