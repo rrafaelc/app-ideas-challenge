@@ -119,7 +119,7 @@ export const ClickOutsidePanel = styled.div`
 	// A little trick if the user click outside notification panel
 	position: absolute;
 	width: 100%;
-	height: 100%;
+	height: calc(100% - 46px);
 
 	visibility: hidden;
 	background-color: transparent;
