@@ -49,24 +49,82 @@ export const Container = styled.div`
 `;
 
 export const Panel = styled.div`
-	width: 0;
 	height: 388px;
 	border-radius: 6px;
 	background: #323232;
+	border: 1px solid #fff;
 
 	position: absolute;
 	top: 56px;
 	right: 10px;
 
+	display: flex;
+	flex-direction: column;
+	z-index: 100;
+
+	/*
+    The way I want to hide and show the notication,
+    the width needs to be 0, to not affect the body element
+  */
+	width: 0;
 	transform: translateX(30vw);
 	opacity: 0;
-	overflow-y: auto;
 
 	transition: all 0.5s;
 
 	&.active {
 		width: 208px;
-		opacity: 1;
 		transform: translateX(0px);
+		opacity: 1;
+	}
+
+	.panel {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		border-bottom: 1px solid #fff;
+
+		span {
+			margin-left: 12px;
+		}
+
+		.close {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 12px;
+			background-color: transparent;
+		}
+	}
+
+	.text {
+		flex: 1;
+
+		padding: 10px 8px 10px 15px;
+		margin-right: 3px; // When scrollbar show
+
+		overflow-y: auto;
+	}
+
+	p {
+		display: flex;
+		flex-wrap: wrap;
+		word-break: break-all;
+		margin-bottom: 5px;
+	}
+`;
+
+export const ClickOutsidePanel = styled.div`
+	// A little trick if the user click outside notification panel
+	position: absolute;
+	width: 100%;
+	height: 100%;
+
+	visibility: hidden;
+	background-color: transparent;
+
+	&.active {
+		visibility: visible;
 	}
 `;
