@@ -22,6 +22,7 @@ export const Footer = styled.footer`
 	}
 
 	button {
+		z-index: 100;
 		padding: 3px 20px;
 		border-radius: 9px;
 
