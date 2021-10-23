@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 import Header from '../../components/Header';
 import Result from '../../components/Result';
@@ -37,6 +38,16 @@ const App = () => {
 			msg: 'Load DB Starts',
 		};
 		setNotifications([...notifications, notification]);
+		toast.info('Load DB Starts', {
+			position: 'top-right',
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: false,
+			draggable: false,
+			progress: undefined,
+			theme: 'dark',
+		});
 	};
 
 	useEffect(() => {
