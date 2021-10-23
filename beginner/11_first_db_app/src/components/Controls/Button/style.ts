@@ -6,21 +6,6 @@ interface ColorProps {
 }
 
 export const Container = styled.div<ColorProps>`
-	/*
-    z-index only works on positioned elements
-    (
-      position: absolute,
-      position: relative,
-      position: fixed,
-      or position: sticky
-    )
-    and flex items
-    (
-      elements that are direct children of display:flex elements
-    )
-   */
-	z-index: 100;
-
 	.status {
 		margin-bottom: 8px;
 		font-size: 14px;
