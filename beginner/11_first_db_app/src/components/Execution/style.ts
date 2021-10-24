@@ -25,6 +25,7 @@ export const Container = styled.div`
 		overflow-y: auto;
 
 		margin-top: 25px;
+		margin-bottom: 20px;
 		padding: 0 20px;
 		font-size: 12px;
 	}

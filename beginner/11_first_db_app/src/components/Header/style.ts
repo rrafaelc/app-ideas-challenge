@@ -98,7 +98,7 @@ export const Panel = styled.div`
 		}
 	}
 
-	.text {
+	.notifications {
 		flex: 1;
 
 		padding: 10px 8px 10px 15px;

@@ -4,7 +4,15 @@ import { AiOutlineClose } from 'react-icons/ai';
 
 import { Header, Container, Panel, ClickOutsidePanel } from './style';
 
-export default () => {
+type NotificationProp = {
+	msg: string;
+};
+
+type Notification = {
+	notifications: NotificationProp[];
+};
+
+export default ({ notifications }: Notification) => {
 	const [show, setShow] = useState(false);
 
 	return (
@@ -40,7 +48,7 @@ export default () => {
 						</button>
 					</div>
 
-					<div className='text'>
+					<div className='notifications'>
 						<p>Load DB Starts</p>
 						<p>Load DB Finished</p>
 						<p>Query DB Starts</p>
