@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { shade } from 'polished';
 
-export const Footer = styled.footer`
+export const Container = styled.footer`
 	margin: 20px 0;
 	width: 937px;
 	height: 40px;

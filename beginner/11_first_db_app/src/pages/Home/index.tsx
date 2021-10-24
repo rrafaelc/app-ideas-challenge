@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import Header from '../../components/Header';
-import Result from '../../components/Result';
-import Controls from '../../components/Controls';
-import Execution from '../../components/Execution';
-import Footer from '../../components/Footer';
+import { Header } from '../../components/Header';
+import { Result } from '../../components/Result';
+import { Controls } from '../../components/Controls';
+import { Execution } from '../../components/Execution';
+import { Footer } from '../../components/Footer';
 
-import Customer from '../../services/Customer';
+import { Customer } from '../../services/Customer';
 
 import { Container, Main, LeftCenter, RightCenter } from './style';
 
@@ -27,7 +27,7 @@ type NotificationProps = {
 	msg: string;
 };
 
-const App = () => {
+export const Home = () => {
 	const [buttonClicked, setButtonClicked] = useState('');
 	const [logs, setLogs] = useState<ExecutionProps[]>([]);
 	const [notifications, setNotifications] = useState<NotificationProps[]>([]);
@@ -132,5 +132,3 @@ const App = () => {
 		</>
 	);
 };
-
-export default App;

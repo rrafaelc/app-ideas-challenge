@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Footer } from './style';
+import { Container } from './style';
 
-export default () => {
+export const Footer = () => {
 	// By default not show the consent footer
 	const [showConsent, setShowConsent] = useState(false);
 
@@ -45,7 +45,7 @@ export default () => {
 	}, []);
 
 	return (
-		<Footer className={showConsent ? 'show' : ''}>
+		<Container className={showConsent ? 'show' : ''}>
 			<p>
 				No data is collected or sent to a server, all data is client-side only,
 				data used is for educational purposes.
@@ -53,6 +53,6 @@ export default () => {
 			<button type='button' onClick={handleButtonClick}>
 				OK
 			</button>
-		</Footer>
+		</Container>
 	);
 };

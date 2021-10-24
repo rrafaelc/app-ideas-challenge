@@ -11,7 +11,7 @@ interface ExecutionProps {
 	logs: LogProps[];
 }
 
-export default ({ logs }: ExecutionProps) => {
+export const Execution = ({ logs }: ExecutionProps) => {
 	// https://stackoverflow.com/questions/61756810/scrolltobottom-using-reactjs-in-chat-app-for-new-messages
 	const logContainerRef = useRef<HTMLDivElement | null>(null);
 

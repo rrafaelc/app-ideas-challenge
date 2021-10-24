@@ -9,13 +9,16 @@ interface ControlsProps {
 	setButtonClicked: Dispatcher<string>;
 }
 
-export default ({ setButtonClicked }: ControlsProps) => {
-	const handleClick = useCallback((name: string): void => {
-		// eslint-disable-next-line
-		if (true) {
-			setButtonClicked(name);
-		}
-	}, []);
+export const Controls = ({ setButtonClicked }: ControlsProps) => {
+	const handleClick = useCallback(
+		(name: string): void => {
+			// eslint-disable-next-line
+			if (true) {
+				setButtonClicked(name);
+			}
+		},
+		[setButtonClicked],
+	);
 
 	return (
 		<Container>

@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 import { shade } from 'polished';
 
-export const Header = styled.header`
-	background: #323232;
-`;
-
 export const Container = styled.div`
 	position: relative;
 

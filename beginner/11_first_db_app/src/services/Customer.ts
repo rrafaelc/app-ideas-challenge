@@ -12,7 +12,7 @@ type LogProps = {
 // eslint-disable-next-line
 type SendLog = ({ type, msg }: LogProps) => void;
 
-class Customer {
+export class Customer {
 	dbName: string;
 
 	sendLog: SendLog;
@@ -165,5 +165,3 @@ class Customer {
 		};
 	};
 }
-
-export default Customer;

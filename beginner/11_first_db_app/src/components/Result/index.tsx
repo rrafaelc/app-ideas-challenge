@@ -1,6 +1,6 @@
 import { Container } from './style';
 
-export default () => (
+export const Result = () => (
 	<Container>
 		<div className='result'>
 			<table>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FaGithubAlt, FaBell } from 'react-icons/fa';
 import { AiOutlineClose } from 'react-icons/ai';
 
-import { Header, Container, Panel, ClickOutsidePanel } from './style';
+import { Container, Panel, ClickOutsidePanel } from './style';
 
 type NotificationProp = {
 	msg: string;
@@ -12,11 +12,11 @@ type Notification = {
 	notifications: NotificationProp[];
 };
 
-export default ({ notifications }: Notification) => {
+export const Header = ({ notifications }: Notification) => {
 	const [show, setShow] = useState(false);
 
 	return (
-		<Header>
+		<header style={{ background: '#323232' }}>
 			<Container>
 				<span className='logo'>indexedDB App</span>
 				<div className='icons'>
@@ -59,6 +59,6 @@ export default ({ notifications }: Notification) => {
 				className={show ? 'active' : ''}
 				onClick={() => setShow(!show)}
 			/>
-		</Header>
+		</header>
 	);
 };
