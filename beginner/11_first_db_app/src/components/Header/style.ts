@@ -45,6 +45,8 @@ export const Container = styled.div`
 `;
 
 export const Panel = styled.div`
+	z-index: 100;
+
 	height: 388px;
 	border-radius: 6px;
 	background: #323232;
@@ -56,7 +58,6 @@ export const Panel = styled.div`
 
 	display: flex;
 	flex-direction: column;
-	z-index: 100;
 
 	/*
     The way I want to hide and show the notication,
@@ -98,16 +99,18 @@ export const Panel = styled.div`
 		flex: 1;
 
 		padding: 10px 8px 10px 15px;
-		margin-right: 3px; // When scrollbar show
+		margin-right: 3px; // When scrollbar shows
 
 		overflow-y: auto;
-	}
 
-	p {
-		display: flex;
-		flex-wrap: wrap;
-		word-break: break-all;
-		margin-bottom: 5px;
+		p {
+			font-size: 14px;
+
+			display: flex;
+			flex-wrap: wrap;
+			word-break: break-all;
+			margin-bottom: 8px;
+		}
 	}
 `;
 

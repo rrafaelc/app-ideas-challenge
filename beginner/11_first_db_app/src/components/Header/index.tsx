@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FaGithubAlt, FaBell } from 'react-icons/fa';
 import { AiOutlineClose } from 'react-icons/ai';
 
@@ -13,7 +13,20 @@ type Notification = {
 };
 
 export const Header = ({ notifications }: Notification) => {
+	const notificationContainerRef = useRef<HTMLDivElement | null>(null);
 	const [show, setShow] = useState(false);
+
+	useEffect(() => {
+		if (notificationContainerRef.current) {
+			const element = notificationContainerRef.current;
+
+			element.scroll({
+				top: element.scrollHeight,
+				left: 0,
+				behavior: 'smooth',
+			});
+		}
+	}, [notifications]);
 
 	return (
 		<header style={{ background: '#323232' }}>
@@ -48,10 +61,10 @@ export const Header = ({ notifications }: Notification) => {
 						</button>
 					</div>
 
-					<div className='notifications'>
-						<p>Load DB Starts</p>
-						<p>Load DB Finished</p>
-						<p>Query DB Starts</p>
+					<div className='notifications' ref={notificationContainerRef}>
+						{notifications.map(notification => (
+							<p>{notification.msg}</p>
+						))}
 					</div>
 				</Panel>
 			</Container>

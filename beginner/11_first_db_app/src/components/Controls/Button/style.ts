@@ -6,6 +6,7 @@ type ColorProps = {
 };
 
 export const Container = styled.div<ColorProps>`
+	z-index: 100;
 	.status {
 		margin-bottom: 8px;
 		font-size: 14px;

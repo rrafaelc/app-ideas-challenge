@@ -34,8 +34,8 @@ export const Home = () => {
 
 	const sendNotification = useCallback(({ msg }: NotificationProps) => {
 		toast.info(msg, {
-			position: 'top-right',
-			autoClose: 5000,
+			position: 'top-left',
+			autoClose: 2000,
 			hideProgressBar: false,
 			closeOnClick: true,
 			pauseOnHover: false,
