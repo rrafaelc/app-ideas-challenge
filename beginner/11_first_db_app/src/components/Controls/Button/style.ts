@@ -1,14 +1,15 @@
 import styled, { css } from 'styled-components';
 import { shade } from 'polished';
 
-interface ColorProps {
+type ColorProps = {
 	active: boolean;
-}
+};
 
 export const Container = styled.div<ColorProps>`
 	.status {
 		margin-bottom: 8px;
 		font-size: 14px;
+		user-select: none;
 
 		display: flex;
 		justify-content: center;
@@ -23,6 +24,7 @@ export const Container = styled.div<ColorProps>`
 	}
 
 	button {
+		user-select: none;
 		font-size: 18px;
 		padding: 10px 40px;
 		border-radius: 15px;
@@ -33,6 +35,11 @@ export const Container = styled.div<ColorProps>`
 		background-color: ${props => (props.active ? '#00D415' : '#ff0040')};
 
 		transition: background-color 0.2s;
+	}
+
+	button:disabled {
+		color: #fff;
+		pointer-events: none;
 	}
 
 	button:hover {

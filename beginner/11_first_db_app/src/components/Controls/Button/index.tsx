@@ -1,18 +1,19 @@
 import { Container } from './style';
 
-interface ButtonProps {
+type ButtonProps = {
 	name: string;
 	active: boolean;
 	onClick: () => void;
-}
+	disabled: boolean;
+};
 
-export default ({ name, active, onClick }: ButtonProps) => (
+export const Button = ({ name, active, onClick, disabled }: ButtonProps) => (
 	<Container active={active}>
 		<div className='status'>
 			<p>Status</p>
 			<div className='dot' />
 		</div>
-		<button type='button' onClick={onClick}>
+		<button type='button' onClick={onClick} disabled={disabled}>
 			{name}
 		</button>
 	</Container>
