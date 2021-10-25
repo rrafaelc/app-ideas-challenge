@@ -1,7 +1,11 @@
-type RequestDTO = {
+import { Dispatch, SetStateAction } from 'react';
+
+type CustomerDTO = {
 	userid: string;
 	name: string;
 	email: string;
+	order: string;
+	sales: string;
 };
 
 type LogProps = {
@@ -9,8 +13,11 @@ type LogProps = {
 	msg: string;
 };
 
-// eslint-disable-next-line
 type SendLog = ({ type, msg }: LogProps) => void;
+
+type Dispatcher<S> = Dispatch<SetStateAction<S>>;
+
+type setDone = Dispatcher<boolean>;
 
 export class Customer {
 	dbName: string;
@@ -22,7 +29,6 @@ export class Customer {
 		this.sendLog = sendLog;
 
 		if (!window.indexedDB) {
-			// eslint-disable-next-line
 			window.alert(
 				"Your browser doesn't support a stable version of IndexedDB. Such and such feature will not be available.",
 			);
@@ -45,13 +51,13 @@ export class Customer {
 			});
 		};
 
-		request.onsuccess = (event: any) => {
+		request.onsuccess = () => {
 			this.sendLog({
 				type: 'info',
 				msg: 'Deleting all customers...',
 			});
 
-			const db = event.target!.result;
+			const db = request.result;
 			const txn = db.transaction('customers', 'readwrite');
 
 			txn.onerror = (event: any) => {
@@ -63,6 +69,7 @@ export class Customer {
 
 			txn.oncomplete = () => {
 				this.sendLog({ type: 'info', msg: 'All rows removed!' });
+
 				this.sendLog({ type: 'function', msg: 'Clear DB Finished' });
 			};
 			const objectStore = txn.objectStore('customers');
@@ -75,30 +82,102 @@ export class Customer {
 		};
 	};
 
-	// addData = (customerData: RequestDTO[]) => {
-	// const request = indexedDB.open(this.dbName, 1);
+	queryData = (
+		pushCustomer: (customer: CustomerDTO) => void,
+		setDone: setDone,
+	) => {
+		setDone(false);
+		const request = indexedDB.open(this.dbName, 1);
 
-	// request.onerror = event => {
-	// console.log(`addData - Database error: ${event.target.}`);
-	// };
+		request.onerror = (event: any) => {
+			this.sendLog({
+				type: 'error',
+				msg: `queryData - Database error: ${event.target.error.code} - ${event.target.error.message}`,
+			});
+		};
 
-	// request.onsuccess = () => {
-	// const db = request.result;
+		request.onsuccess = () => {
+			this.sendLog({
+				type: 'info',
+				msg: 'Query all customers...',
+			});
 
-	// const transaction = db.transaction(['customers'], 'readwrite');
-	// };
+			const db = request.result;
 
-	// customerData.forEach((customer: RequestDTO) => {
-	// objectStore.put(customer);
-	// });
-	// };
+			try {
+				const transaction = db.transaction(['customers'], 'readonly');
+
+				transaction.onerror = (event: any) => {
+					this.sendLog({
+						type: 'error',
+						msg: `queryData - Transaction error: ${event.target.error.code} - ${event.target.error.message}`,
+					});
+				};
+
+				transaction.oncomplete = () => {
+					this.sendLog({ type: 'info', msg: 'Query transaction done!' });
+
+					this.sendLog({ type: 'function', msg: 'Query DB Finished' });
+					setDone(true);
+				};
+
+				const objectStore = transaction.objectStore('customers');
+
+				const openCursor = objectStore.openCursor();
+
+				openCursor.onerror = (event: any) => {
+					this.sendLog({
+						type: 'error',
+						msg: `queryData - openCursor error: ${event.target.error.code} - ${event.target.error.message}`,
+					});
+				};
+
+				openCursor.onsuccess = () => {
+					const cursor = openCursor.result;
+
+					if (cursor) {
+						const customer: CustomerDTO = {
+							userid: cursor.value.userid,
+							name: cursor.value.name,
+							email: cursor.value.email,
+							order: cursor.value.order,
+							sales: cursor.value.sales,
+						};
+
+						pushCustomer(customer);
+
+						cursor.continue();
+					}
+				};
+			} catch {
+				db.close();
+				indexedDB.deleteDatabase(this.dbName);
+
+				this.sendLog({
+					type: 'error',
+					msg: 'No database found, load database first',
+				});
+				/**
+				 * indexedDB.open will create a database if not exists
+				 * if exists, will read the database
+				 * this method query dont create index
+				 * so will throw an error
+				 * the only request to create database is initialLoad
+				 * So, if throw an error, then close the db,
+				 * delete the db created,
+				 * and send an error
+				 */
+			}
+		};
+	};
 
 	/**
 	 * Populate the Customer database with an initial set of customer data
 	 * @param {[object]} customerData Data to add
 	 * @memberof Customer
 	 */
-	initialLoad = (customerData: RequestDTO[]) => {
+
+	initialLoad = (customerData: CustomerDTO[]) => {
 		const request = indexedDB.open(this.dbName, 1);
 
 		request.onerror = (event: any) => {
@@ -108,21 +187,19 @@ export class Customer {
 			});
 		};
 
-		request.onupgradeneeded = (event: any) => {
-			const db = event.target.result;
+		request.onupgradeneeded = () => {
+			// request.onupgradeneeded = (event) => {
+			// const db = request.result
+			const db = request.result;
 			const objectStore = db.createObjectStore('customers', {
 				keyPath: 'userid',
 			});
-			objectStore.onerror = (event: any) => {
-				this.sendLog({
-					type: 'error',
-					msg: `initialLoad - objectStore error: ${event.target.error.code} - ${event.target.error.message}`,
-				});
-			};
 
 			// Create an index to search customers by name and email
 			objectStore.createIndex('name', 'name', { unique: false });
 			objectStore.createIndex('email', 'email', { unique: true });
+			objectStore.createIndex('order', 'order', { unique: false });
+			objectStore.createIndex('sales', 'sales', { unique: false });
 		};
 
 		/**

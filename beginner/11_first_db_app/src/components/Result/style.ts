@@ -16,7 +16,10 @@ export const Container = styled.div`
 		padding: 20px 10px;
 
 		overflow: auto;
-		/* visibility: hidden; */
+
+		&.loading {
+			display: none;
+		}
 
 		table {
 			margin: 0 auto;
@@ -49,6 +52,7 @@ export const Container = styled.div`
 		td {
 			border: 1px solid #fff;
 			border-right: 0;
+			padding: 5px 0;
 
 			&:last-child {
 				border-right: 1px solid #fff;

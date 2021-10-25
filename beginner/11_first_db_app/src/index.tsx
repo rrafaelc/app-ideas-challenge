@@ -12,7 +12,7 @@ ReactDOM.render(
 	<React.StrictMode>
 		<Home />
 		<GlobalStyle />
-		<ToastContainer />
+		<ToastContainer limit={4} />
 	</React.StrictMode>,
 	document.getElementById('root'),
 );

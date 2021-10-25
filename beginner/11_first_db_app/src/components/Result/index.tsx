@@ -1,40 +1,57 @@
+import { useEffect, useState } from 'react';
 import { Container } from './style';
 
-export const Result = () => (
-	<Container>
-		<div className='result'>
-			<table>
-				<thead>
-					<tr>
-						<td className='userid'>USER ID</td>
-						<td className='name'>NAME</td>
-						<td className='email'>E-MAIL</td>
-						<td className='order'>LAST ORDER DATE</td>
-						<td className='sales'>SALES</td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>444</td>
-						<td>Bill</td>
-						<td>bill@company.com</td>
-						<td>2021-10-19 14:45:27</td>
-						<td>23</td>
-					</tr>
-					<tr>
-						<td>555</td>
-						<td>Donna</td>
-						<td>donna@home.org</td>
-						<td>2021-05-01 08:10:05</td>
-						<td>40</td>
-					</tr>
-				</tbody>
-				{/* <thead>
-					<tr>
-						<td className='norows'>No rows to display</td>
-					</tr>
-				</thead> */}
-			</table>
-		</div>
-	</Container>
-);
+type Customer = {
+	userid: string;
+	name: string;
+	email: string;
+	order: string;
+	sales: string;
+};
+
+type ResultProps = {
+	data: Customer[];
+	load: boolean;
+};
+
+export const Result = ({ data, load }: ResultProps) => {
+	const [customers, setCustomers] = useState<Customer[]>([]);
+
+	useEffect(() => {
+		if (load) {
+			setCustomers([]);
+			data.forEach(customer => {
+				setCustomers(customers => [...customers, customer]);
+			});
+		}
+	}, [data, load]);
+
+	return (
+		<Container>
+			<div className={load ? 'result' : 'result loading'}>
+				<table>
+					<thead>
+						<tr>
+							<td className='userid'>USER ID</td>
+							<td className='name'>NAME</td>
+							<td className='email'>E-MAIL</td>
+							<td className='order'>LAST ORDER DATE</td>
+							<td className='sales'>SALES</td>
+						</tr>
+					</thead>
+					<tbody>
+						{customers.map(customer => (
+							<tr>
+								<td>{customer.userid}</td>
+								<td>{customer.name}</td>
+								<td>{customer.email}</td>
+								<td>{customer.order}</td>
+								<td>{customer.sales}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
+		</Container>
+	);
+};

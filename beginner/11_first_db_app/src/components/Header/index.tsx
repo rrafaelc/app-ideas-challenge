@@ -34,7 +34,7 @@ export const Header = ({ notifications }: Notification) => {
 				<span className='logo'>indexedDB App</span>
 				<div className='icons'>
 					<a
-						href='https://github.com'
+						href='https://github.com/rrafaelc/app-ideas-challenge'
 						target='_blank'
 						rel='noopener noreferrer'
 						title='Github'
@@ -63,7 +63,9 @@ export const Header = ({ notifications }: Notification) => {
 
 					<div className='notifications' ref={notificationContainerRef}>
 						{notifications.map(notification => (
-							<p>{notification.msg}</p>
+							<p key={Math.random().toString(36).substr(2, 9)}>
+								{notification.msg}
+							</p>
 						))}
 					</div>
 				</Panel>

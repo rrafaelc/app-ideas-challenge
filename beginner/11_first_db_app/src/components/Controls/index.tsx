@@ -1,4 +1,5 @@
 import { useCallback, Dispatch, SetStateAction, useState } from 'react';
+
 import { Button } from './Button';
 
 import { Container } from './style';
@@ -27,6 +28,10 @@ export const Controls = ({ setButtonClicked }: ControlsProps) => {
 				setLoad(true);
 				setClear(false);
 
+				setButtonClicked(name);
+			}
+
+			if (name === 'query') {
 				setButtonClicked(name);
 			}
 		},
