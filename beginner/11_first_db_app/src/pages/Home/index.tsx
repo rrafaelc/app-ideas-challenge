@@ -154,7 +154,7 @@ export const Home = () => {
 			<Container>
 				<Main>
 					<LeftCenter>
-						<Result load={done} data={data} />
+						<Result done={done} data={data} />
 						<Controls setButtonClicked={setButtonClicked} />
 					</LeftCenter>
 					<RightCenter>

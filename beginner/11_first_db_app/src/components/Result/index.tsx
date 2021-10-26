@@ -11,24 +11,24 @@ type Customer = {
 
 type ResultProps = {
 	data: Customer[];
-	load: boolean;
+	done: boolean;
 };
 
-export const Result = ({ data, load }: ResultProps) => {
+export const Result = ({ data, done }: ResultProps) => {
 	const [customers, setCustomers] = useState<Customer[]>([]);
 
 	useEffect(() => {
-		if (load) {
+		if (done) {
 			setCustomers([]);
 			data.forEach(customer => {
 				setCustomers(customers => [...customers, customer]);
 			});
 		}
-	}, [data, load]);
+	}, [data, done]);
 
 	return (
 		<Container>
-			<div className={load ? 'result' : 'result loading'}>
+			<div className={done ? 'result' : 'result loading'}>
 				<table>
 					<thead>
 						<tr>
