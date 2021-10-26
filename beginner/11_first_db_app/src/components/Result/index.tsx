@@ -41,7 +41,7 @@ export const Result = ({ data, load }: ResultProps) => {
 					</thead>
 					<tbody>
 						{customers.map(customer => (
-							<tr>
+							<tr key={Math.random().toString(36).substr(2, 9)}>
 								<td>{customer.userid}</td>
 								<td>{customer.name}</td>
 								<td>{customer.email}</td>
