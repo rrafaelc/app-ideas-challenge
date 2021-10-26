@@ -155,7 +155,11 @@ export const Home = () => {
 				<Main>
 					<LeftCenter>
 						<Result done={done} data={data} />
-						<Controls setButtonClicked={setButtonClicked} />
+						<Controls
+							setButtonClicked={setButtonClicked}
+							setDone={setDone}
+							done={done}
+						/>
 					</LeftCenter>
 					<RightCenter>
 						<Execution logs={logs} />

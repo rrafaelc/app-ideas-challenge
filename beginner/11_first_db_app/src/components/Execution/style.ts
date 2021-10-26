@@ -12,6 +12,7 @@ export const Container = styled.div`
 
 		font-size: 18px;
 		background: #a81c1c;
+		user-select: none;
 
 		display: flex;
 		align-items: center;

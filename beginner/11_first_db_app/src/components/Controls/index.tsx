@@ -1,4 +1,10 @@
-import { useCallback, Dispatch, SetStateAction, useState } from 'react';
+import {
+	useCallback,
+	Dispatch,
+	SetStateAction,
+	useState,
+	useEffect,
+} from 'react';
 
 import { Button } from './Button';
 
@@ -9,11 +15,19 @@ type Dispatcher<S> = Dispatch<SetStateAction<S>>;
 
 type ControlsProps = {
 	setButtonClicked: Dispatcher<string>;
+	setDone: Dispatcher<boolean>;
+	done: boolean;
 };
 
-export const Controls = ({ setButtonClicked }: ControlsProps) => {
+export const Controls = ({
+	setButtonClicked,
+	setDone,
+	done,
+}: ControlsProps) => {
 	const [load, setLoad] = useState(true);
 	const [clear, setClear] = useState(false);
+	const [loading, setLoading] = useState(false);
+	const [queryClicked, setQueryClicked] = useState(false);
 
 	const handleClick = useCallback(
 		(name: string): void => {
@@ -32,11 +46,24 @@ export const Controls = ({ setButtonClicked }: ControlsProps) => {
 			}
 
 			if (name === 'query') {
+				// Force user to wait query to query again
+				// reset setDone manually for useEffect
+				setDone(false);
+				setLoading(true);
+
+				setQueryClicked(true);
 				setButtonClicked(name);
 			}
 		},
-		[setButtonClicked],
+		[setButtonClicked, setDone],
 	);
+
+	useEffect(() => {
+		if (done && queryClicked) {
+			setLoading(false);
+			setQueryClicked(false);
+		}
+	}, [done, queryClicked]);
 
 	return (
 		<Container>
@@ -45,18 +72,21 @@ export const Controls = ({ setButtonClicked }: ControlsProps) => {
 				name='Load DB'
 				active={load}
 				disabled={!load}
+				className={loading ? 'loading' : ''}
 			/>
 			<Button
 				onClick={() => handleClick('query')}
 				name='Query DB'
 				active
 				disabled={false}
+				className={loading ? 'loading' : ''}
 			/>
 			<Button
 				onClick={() => handleClick('clear')}
 				name='Clear DB'
 				active={clear}
 				disabled={!clear}
+				className={loading ? 'loading' : ''}
 			/>
 		</Container>
 	);

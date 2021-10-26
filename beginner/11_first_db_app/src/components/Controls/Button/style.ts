@@ -29,6 +29,11 @@ export const Container = styled.div<ColorProps>`
 		font-size: 18px;
 		padding: 10px 40px;
 		border-radius: 15px;
+
+		&.loading {
+			pointer-events: none;
+			background-color: #000;
+		}
 	}
 
 	.dot,

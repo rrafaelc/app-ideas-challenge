@@ -94,6 +94,7 @@ export class Customer {
 				type: 'error',
 				msg: `queryData - Database error: ${event.target.error.code} - ${event.target.error.message}`,
 			});
+			setDone(true);
 		};
 
 		request.onsuccess = () => {
@@ -112,13 +113,14 @@ export class Customer {
 						type: 'error',
 						msg: `queryData - Transaction error: ${event.target.error.code} - ${event.target.error.message}`,
 					});
+					setDone(true);
 				};
 
 				transaction.oncomplete = () => {
 					this.sendLog({ type: 'info', msg: 'Query transaction done!' });
 
 					this.sendLog({ type: 'function', msg: 'Query DB Finished' });
-					setDone(true);
+					setDone(true); // No errors, then done
 				};
 
 				const objectStore = transaction.objectStore('customers');
@@ -130,6 +132,7 @@ export class Customer {
 						type: 'error',
 						msg: `queryData - openCursor error: ${event.target.error.code} - ${event.target.error.message}`,
 					});
+					setDone(true);
 				};
 
 				openCursor.onsuccess = () => {
@@ -150,6 +153,7 @@ export class Customer {
 					}
 				};
 			} catch {
+				setDone(true);
 				db.close();
 				indexedDB.deleteDatabase(this.dbName);
 
