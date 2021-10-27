@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Flip Image</title>
+  </head>
+  <body>
+    <div class="flip-box">
+      <div class="flip-box-inner">
+        <div class="flip-box-front">
+          <img id="frontimg" src="assets/bird.jpg" alt="Bird" />
+        </div>
+        <div class="flip-box-back">
+          <img src="assets/tiger.jpg" alt="Tiger" />
+        </div>
+      </div>
+    </div>
+
+    <form>
+      <input
+        id="input-img"
+        type="text"
+        name="url"
+        placeholder="Enter image url"
+      />
+      <button id="submit" type="submit">Display</button>
+    </form>
+
+    <script src="scripts.js" defer></script>
+  </body>
+</html>
