@@ -6,22 +6,28 @@ const input = document.querySelector('#input-img');
 
 const form = document.querySelector('form');
 
+let stop = false;
+
 function rotateDiv(x, y) {
-  if (x <= 70 && y <= 300) {
+  if (x <= 70 && (y <= 300) & !stop) {
     // Left to Right
     flipboxinner.style.transform = 'rotateY(180deg)';
     flipboxback.style.transform = 'rotateY(180deg)';
-  } else if (x >= 70 && y >= 230) {
+    stop = true;
+  } else if (x >= 70 && (y >= 230) & !stop) {
     // Bottom to Top
     flipboxinner.style.transform = 'rotateX(180deg)';
     flipboxback.style.transform = 'rotateX(180deg)';
-  } else if (x >= 70 && y <= 70) {
+    stop = true;
+  } else if (x >= 70 && (y <= 70) & !stop) {
     // Top to Bottom
     flipboxinner.style.transform = 'rotateX(-180deg)';
     flipboxback.style.transform = 'rotateX(180deg)';
-  } else if (x >= 330 && y > 0) {
+    stop = true;
+  } else if (x >= 330 && (y > 0) & !stop) {
     flipboxinner.style.transform = 'rotateY(-180deg)';
     flipboxback.style.transform = 'rotateY(180deg)';
+    stop = true;
   }
 }
 
@@ -49,6 +55,7 @@ function getCoordinates(ev) {
 }
 
 function reset() {
+  stop = false;
   flipboxinner.style.transform = 'rotateY(0deg)';
 }
 
