@@ -5,6 +5,7 @@ const flipboxback = document.querySelector('.flip-box-back');
 const input = document.querySelector('#input-img');
 
 const form = document.querySelector('form');
+const error = document.querySelector('.error');
 
 let stop = false;
 
@@ -33,13 +34,14 @@ function rotateDiv(x, y) {
 
 function loadImage(src) {
   const image = new Image();
+  error.classList.remove('show');
   image.onload = () => {
     frontimg.src = `${image.src}`;
   };
 
   image.onerror = () => {
     input.value = '';
-    alert('Image not found');
+    error.classList.add('show');
     return;
   };
 

@@ -28,23 +28,6 @@ button {
   cursor: pointer;
 }
 
-form {
-  margin-top: 50px;
-  display: flex;
-  align-items: center;
-}
-
-#input-img {
-  font-size: 1.3rem;
-  margin-right: 5px;
-  padding: 2px 5px;
-}
-
-#submit {
-  padding: 8px 20px;
-  border-radius: 5px;
-}
-
 .flip-box {
   margin: 100px 0 0;
   background-color: transparent;
@@ -78,4 +61,31 @@ img {
 
 .flip-box-back {
   transform: rotateY(180deg);
+}
+
+form {
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+}
+
+#input-img {
+  font-size: 1.3rem;
+  margin-right: 5px;
+  padding: 2px 5px;
+}
+
+#submit {
+  padding: 8px 20px;
+  border-radius: 5px;
+}
+
+.error {
+  margin-top: 5px;
+  color: red;
+  visibility: hidden;
+}
+
+.error.show {
+  visibility: visible;
 }
