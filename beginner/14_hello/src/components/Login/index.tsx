@@ -8,7 +8,7 @@ import uncheckedSvg from '../../assets/unchecked.svg';
 import './styles.css';
 
 export const Login = () => {
-	const [showModal, setShowModal] = useState(true);
+	const [showModal, setShowModal] = useState(false);
 	const [codeLanguage, setCodeLanguage] = useState('');
 
 	const toggleModal = () => setShowModal(!showModal);
