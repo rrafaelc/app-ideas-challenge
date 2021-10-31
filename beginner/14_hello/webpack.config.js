@@ -16,6 +16,9 @@ module.exports = {
 		hot: true,
 		open: true,
 		port: 3000,
+		client: {
+			logging: 'error',
+		},
 	},
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js', '.jsx'],

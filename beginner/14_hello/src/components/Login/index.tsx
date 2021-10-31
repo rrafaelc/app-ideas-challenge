@@ -2,6 +2,8 @@ import { useState, MouseEvent } from 'react';
 
 import { Modal } from './Modal';
 
+import { useUserInfo } from '../../context/UserInfo';
+
 import checkedSvg from '../../assets/checked.svg';
 import uncheckedSvg from '../../assets/unchecked.svg';
 
@@ -11,6 +13,10 @@ export const Login = () => {
 	const [showModal, setShowModal] = useState(false);
 	const [codeLanguage, setCodeLanguage] = useState('');
 
+	const { username, setUsername } = useUserInfo();
+
+	console.log(username);
+
 	const toggleModal = () => setShowModal(!showModal);
 
 	const handleCode = (code: string) => {
@@ -18,6 +24,7 @@ export const Login = () => {
 	};
 
 	const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
+		setUsername('Rafael Costa');
 		e.preventDefault();
 	};
 
