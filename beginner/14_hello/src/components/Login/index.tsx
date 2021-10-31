@@ -1,8 +1,8 @@
-import { useState, MouseEvent } from 'react';
+import { useState, useRef } from 'react';
 
 import { Modal } from './Modal';
 
-import { useUserInfo } from '../../context/UserInfo';
+import { useUserInfo, useUserLogin } from '../../context/UserInfo';
 
 import checkedSvg from '../../assets/checked.svg';
 import uncheckedSvg from '../../assets/unchecked.svg';
@@ -10,12 +10,14 @@ import uncheckedSvg from '../../assets/unchecked.svg';
 import './styles.css';
 
 export const Login = () => {
+	const usernameRef = useRef<HTMLInputElement>(null);
+	const passwordRef = useRef<HTMLInputElement>(null);
+
 	const [showModal, setShowModal] = useState(false);
 	const [codeLanguage, setCodeLanguage] = useState('');
 
 	const { username, setUsername } = useUserInfo();
-
-	console.log(username);
+	const { setIsLoggedIn } = useUserLogin();
 
 	const toggleModal = () => setShowModal(!showModal);
 
@@ -23,21 +25,61 @@ export const Login = () => {
 		setCodeLanguage(code);
 	};
 
-	const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
-		setUsername('Rafael Costa');
-		e.preventDefault();
+	const clearInputsErrors = () => {
+		usernameRef.current!.classList.remove('error');
+		passwordRef.current!.classList.remove('error');
+	};
+
+	const handleSubmit = () => {
+		const nameRef = usernameRef.current!;
+		const pwRef = passwordRef.current!;
+
+		const name = nameRef.value.trim();
+		const pw = pwRef.value.trim();
+
+		if (!name) {
+			nameRef.classList.add('error');
+		} else {
+			nameRef.classList.remove('error');
+		}
+
+		if (!pw) {
+			pwRef.classList.add('error');
+		} else {
+			pwRef.classList.remove('error');
+		}
+
+		if (name && pw) {
+			setUsername(name);
+			setIsLoggedIn(true);
+		}
 	};
 
 	return (
 		<div className='container'>
-			<h1 className='logoutMessage'>Have a great day Rafael Costa!</h1>
+			{username && (
+				<h1 className='logoutMessage'>Have a great day {username}!</h1>
+			)}
 			<h1 className='title'>Login</h1>
 			<form>
 				<label htmlFor='userName'>Username</label>
-				<input id='userName' name='userName' placeholder='Enter username' />
+				<input
+					ref={usernameRef}
+					onFocus={clearInputsErrors}
+					id='userName'
+					name='userName'
+					placeholder='Enter username'
+				/>
 
 				<label htmlFor='password'>Password</label>
-				<input id='password' name='password' placeholder='Enter password' />
+				<input
+					ref={passwordRef}
+					onFocus={clearInputsErrors}
+					type='password'
+					id='password'
+					name='password'
+					placeholder='Enter password'
+				/>
 
 				<div className='languageCode'>
 					<div
@@ -71,7 +113,7 @@ export const Login = () => {
 				{showModal && (
 					<Modal handleCode={handleCode} toggleModal={toggleModal} />
 				)}
-				<button className='loginButton' type='submit' onClick={handleSubmit}>
+				<button className='loginButton' type='button' onClick={handleSubmit}>
 					Login
 				</button>
 			</form>
