@@ -1,0 +1,111 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.logoutMessage {
+	margin-bottom: 30px;
+	font-size: 24px;
+	font-weight: 500;
+
+	display: none;
+}
+
+.title {
+	font-size: 48px;
+}
+
+form {
+	margin-top: 50px;
+
+	display: flex;
+	flex-direction: column;
+}
+
+form label {
+	font-size: 14px;
+	margin-bottom: 10px;
+}
+
+form input:first-of-type {
+	margin-bottom: 10px;
+}
+
+form input {
+	width: 238px;
+	outline-color: transparent;
+	border: 0;
+	border-radius: 10px;
+	font-size: 12px;
+	padding: 10px;
+
+	box-shadow: 0 0 4px 0 #554454;
+	background: #171717;
+}
+
+form input::placeholder {
+	color: #b8b8b8;
+}
+
+form input:focus {
+	outline: 2px solid #8d0696;
+}
+
+form input.empty {
+	box-shadow: inset 0 0 0 2px #f20917;
+}
+
+.languageCode {
+	user-select: none;
+
+	display: flex;
+	flex-direction: column;
+}
+
+.optional {
+	padding: 20px 0;
+	cursor: pointer;
+
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+}
+
+.optional img {
+	margin-right: 7px;
+}
+
+.codeChoosed {
+	cursor: pointer;
+	align-self: flex-start;
+
+	margin-bottom: 20px;
+	padding: 5px 18px;
+
+	text-transform: uppercase;
+	text-align: center;
+	border-radius: 5px;
+
+	background-color: #8d0696;
+}
+
+form .loginButton {
+	width: 238px;
+	padding: 11px 0;
+
+	font-size: 18px;
+	font-weight: 500;
+	color: #fff;
+	background-color: transparent;
+
+	outline: 0;
+	border: 1px solid #e52b64;
+	border-radius: 10px;
+
+	transition: background-color 0.2s;
+}
+
+form .loginButton:hover {
+	background-color: #e52b64;
+}
