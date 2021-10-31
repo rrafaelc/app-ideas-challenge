@@ -1,0 +1,56 @@
+.infoContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.infoContainer p {
+	font-size: 24px;
+	font-weight: 500;
+}
+
+.infoContainer .hello {
+	color: #e52b64;
+}
+
+.infoContainer .info {
+	margin: 50px 0;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.infoContainer .info p:first-child {
+	font-size: 14px;
+	font-style: italic;
+	margin-bottom: -5px;
+}
+
+.infoContainer .info p {
+	font-weight: normal;
+}
+
+.infoContainer .info a {
+	color: #e52b64;
+	text-decoration: none;
+}
+
+.infoContainer button {
+	width: 238px;
+	padding: 11px 0;
+
+	font-size: 18px;
+	font-weight: 500;
+	color: #fff;
+	background-color: transparent;
+
+	outline: 0;
+	border: 1px solid #f20917;
+	border-radius: 10px;
+
+	transition: background-color 0.2s;
+}
+
+.infoContainer button:hover {
+	background-color: #f20917;
+}
