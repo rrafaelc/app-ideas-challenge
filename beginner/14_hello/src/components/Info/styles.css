@@ -1,4 +1,5 @@
 .infoContainer {
+	margin-top: 57px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -53,4 +54,48 @@
 
 .infoContainer button:hover {
 	background-color: #f20917;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+	0% {
+		-webkit-transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+	}
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.loading {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	gap: 10px;
+}
+
+.loading__spin {
+	border: 5px solid #f3f3f3;
+	border-top: 5px solid #e52b64;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	-webkit-animation: spin 1s linear infinite; /* Safari */
+	animation: spin 1s linear infinite;
+}
+
+.loading__text {
+	font-size: 24px;
+	font-weight: 500;
+	color: #e52b64;
 }

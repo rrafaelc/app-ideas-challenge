@@ -13,7 +13,6 @@ const codes: string[] = [
 	'be',
 	'bg',
 	'bn',
-	'br',
 	'bs',
 	'cs',
 	'da',
@@ -120,7 +119,11 @@ export const Modal = ({ handleCode, toggleModal }: ModalProps) => {
 				</div>
 
 				<div className='modalButtons'>
-					<button type='button' onClick={handleCancel}>
+					<button
+						type='button'
+						onClick={handleCancel}
+						title='Set language automatic'
+					>
 						Cancel
 					</button>
 					<button type='button' onClick={handleSubmit}>

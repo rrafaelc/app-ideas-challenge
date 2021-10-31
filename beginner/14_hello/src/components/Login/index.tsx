@@ -14,9 +14,9 @@ export const Login = () => {
 	const passwordRef = useRef<HTMLInputElement>(null);
 
 	const [showModal, setShowModal] = useState(false);
-	const [codeLanguage, setCodeLanguage] = useState('');
 
-	const { username, setUsername } = useUserInfo();
+	const { username, setUsername, codeLanguage, setCodeLanguage } =
+		useUserInfo();
 	const { setIsLoggedIn } = useUserLogin();
 
 	const toggleModal = () => setShowModal(!showModal);
