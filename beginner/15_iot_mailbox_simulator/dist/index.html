@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IOT Mailbox Simulator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="main.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <audio id="horn">
+        <source src="assets/horn.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+      <div class="controlPanel">
+        <h1>Control Panel</h1>
+        <div class="interval">
+          <p>Interval</p>
+          <div>
+            <input
+              id="interval"
+              type="number"
+              placeholder="500"
+              value="500"
+              min="0"
+            />
+            <span>ms</span>
+          </div>
+        </div>
+        <div class="onOff">
+          <p>ON/OFF</p>
+          <div class="toggle">
+            <div class="circle"></div>
+          </div>
+        </div>
+        <button class="resetButton">Reset</button>
+      </div>
+
+      <div class="executionDetails">
+        <h1>IotMailBox execution details</h1>
+        <div class="logs"></div>
+      </div>
+      <div class="notifications">
+        <h1>Notifications</h1>
+        <div class="logs"></div>
+      </div>
+    </div>
+  </body>
+</html>

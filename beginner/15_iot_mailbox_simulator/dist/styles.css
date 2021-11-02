@@ -1,0 +1,186 @@
+:root {
+  color-scheme: dark;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  box-sizing: border-box;
+  font-family: Roboto, sans-serif;
+}
+
+body {
+  max-width: 1280px;
+  margin: 0 auto;
+
+  background-color: #191a19;
+  color: #fff;
+}
+
+h1 {
+  margin-bottom: 40px;
+  font-size: 24px;
+  text-align: center;
+}
+
+.container {
+  padding: 30px 80px;
+
+  display: flex;
+}
+
+.controlPanel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.controlPanel .interval {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.controlPanel .interval input {
+  width: 70px;
+  padding: 4px 5px;
+
+  border-radius: 10px;
+  border: 1px solid #fff;
+
+  text-align: right;
+  font-size: 12px;
+  color: #fff;
+  background: transparent;
+}
+
+.controlPanel .interval span {
+  font-size: 12px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.controlPanel .onOff {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 50px;
+}
+
+.toggle {
+  cursor: pointer;
+  width: 75px;
+  border: 1px solid #eee;
+  border-radius: 20px;
+  padding: 4px 10px;
+
+  transition: all 0.3s ease;
+  transition-property: background-color, border-color;
+}
+
+.toggle.active {
+  background-color: #1e5128;
+  border: 1px solid #1e5128;
+}
+
+.toggle .circle {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #eee;
+
+  transition: transform 0.3s ease;
+}
+
+.toggle.active .circle {
+  transform: translateX(30px);
+}
+
+.resetButton {
+  cursor: pointer;
+  padding: 10px 45px;
+  border-radius: 20px;
+  border: 1px solid #4e9f3d;
+  background: transparent;
+  color: #fff;
+  font-weight: bold;
+
+  transition: background-color 0.2s;
+}
+
+.resetButton:hover {
+  background: #4e9f3d;
+}
+
+.resetButton:active {
+  transform: translateY(1px);
+}
+
+.executionDetails {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.executionDetails .logs {
+  height: 400px;
+  padding-right: 10px;
+
+  overflow-y: auto;
+}
+
+.executionDetails .logs p {
+  display: flex;
+}
+
+.executionDetails .logs p + p {
+  margin-top: 10px;
+}
+
+.executionDetails .logs span.signal {
+  color: #fff;
+  text-align: right;
+  width: 50px;
+}
+
+.notifications {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.notifications .logs {
+  width: 310px;
+  height: 400px;
+  overflow-y: hidden;
+}
+
+.notifications .logs p + p {
+  margin-top: 10px;
+}
+
+.notifications .logs p.green {
+  color: #4e9f3d;
+}
+
+.notifications .logs p.yellow {
+  color: #f9b914;
+}
+
+.notifications .logs p.red {
+  color: #e93838;
+}
