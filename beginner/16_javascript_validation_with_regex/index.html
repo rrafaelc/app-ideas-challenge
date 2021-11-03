@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Javascript Validation With Regex</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="index.js" defer></script>
+  </head>
+  <body>
+    <h1>Javascript Validation With Regex</h1>
+
+    <span id="success-message"
+      >Success! You have successfully submitted the form.</span
+    >
+
+    <form>
+      <div class="username">
+        <input id="username" type="text" placeholder="Enter a username" />
+        <p class="message" id="message-username">
+          Enter letters without spaces
+        </p>
+      </div>
+      <div class="email">
+        <input id="email" type="email" placeholder="Enter a email" />
+        <p class="message" id="message-email">Enter a valid email</p>
+      </div>
+      <div class="password">
+        <input id="password" type="password" placeholder="Enter a password" />
+        <p class="message" id="message-password">
+          0/5 Capital Letters - 0/6 Symbols - 0/2 hyphens(-)
+        </p>
+      </div>
+
+      <button class="disabled" id="submit" type="submit">Submit</button>
+    </form>
+  </body>
+</html>
