@@ -1,0 +1,32 @@
+:root {
+  color-scheme: dark;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #282c34;
+  color: #fff;
+}
+
+h1 {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.App {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+#keyboardEvents {
+  resize: none;
+  width: 200px;
+  height: 330px;
+  padding-left: 20px;
+}
