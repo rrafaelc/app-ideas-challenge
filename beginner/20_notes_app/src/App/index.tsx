@@ -1,27 +1,29 @@
+import { useState } from 'react';
 import { Container, Header, Content } from './styles';
 import { Notes } from '../components/Notes';
 import { Pagination } from '../components/Pagination';
 
-import { useModal } from '../context/ModalContext';
-import { Modal } from '../components/Modal';
+import { ModalCreate } from './ModalCreate';
 
 export const App = () => {
-	const { toggle } = useModal();
+	const [showModal, setShowModal] = useState(false);
+
+	const closeModal = () => setShowModal(false);
 
 	return (
 		<>
-			<Modal />
+			<ModalCreate show={showModal} closeModal={closeModal} />
 			<Header>
 				<h1>Notes App</h1>
 			</Header>
 			<Container>
-				<button type='button' id='createbtn' onClick={toggle}>
+				<button type='button' id='createbtn' onClick={() => setShowModal(true)}>
 					Create
 				</button>
 				<Content>
-					<Notes />
-					<Notes />
-					<Notes />
+					<Notes id='asfafa' />
+					<Notes id='asfafa' />
+					<Notes id='asfafa' />
 				</Content>
 			</Container>
 			<Pagination />

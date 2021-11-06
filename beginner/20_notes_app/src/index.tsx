@@ -3,15 +3,11 @@ import ReactDOM from 'react-dom';
 
 import { App } from './App';
 
-import { GlobalStyle } from './styles/global';
-
-import ModalProvider from './context/ModalContext';
+import { GlobalStyle } from './globalStyle';
 
 ReactDOM.render(
 	<React.StrictMode>
-		<ModalProvider>
-			<App />
-		</ModalProvider>
+		<App />
 		<GlobalStyle />
 	</React.StrictMode>,
 	document.getElementById('root'),
