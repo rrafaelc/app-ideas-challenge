@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { shade } from 'polished';
 
 export const Header = styled.header`
 	width: 100%;
@@ -24,29 +23,6 @@ export const Container = styled.main`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-
-	#createbtn {
-		align-self: flex-end;
-
-		margin: 30px 0;
-		width: 120px;
-		padding: 10px 0;
-		border-radius: 10px;
-
-		background-color: #e63946;
-		color: #fff;
-		font-size: 20px;
-
-		transition: background-color 0.2s;
-	}
-
-	#createbtn:hover {
-		background-color: ${shade(0.2, '#e63946')};
-	}
-
-	#createbtn:active {
-		transform: scale(0.95);
-	}
 `;
 
 export const Content = styled.div`

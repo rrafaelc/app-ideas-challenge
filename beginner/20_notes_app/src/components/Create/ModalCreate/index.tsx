@@ -1,7 +1,7 @@
 import { useState, ChangeEvent } from 'react';
 import { ModalContainer, ModalContentLeft, ModalContentRight } from './styles';
 
-import { Markdown } from '../../services/Markdown';
+import { Markdown } from '../../../services/Markdown';
 
 type Props = {
 	show: boolean;
