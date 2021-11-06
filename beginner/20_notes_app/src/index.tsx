@@ -5,9 +5,13 @@ import { App } from './App';
 
 import { GlobalStyle } from './styles/global';
 
+import ModalProvider from './context/ModalContext';
+
 ReactDOM.render(
 	<React.StrictMode>
-		<App />
+		<ModalProvider>
+			<App />
+		</ModalProvider>
 		<GlobalStyle />
 	</React.StrictMode>,
 	document.getElementById('root'),

@@ -11,11 +11,14 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background: #F1FAEE;
-    color: #000;
+    background-color: #f1faee;
   }
 
   button {
     cursor: pointer;
+  }
+
+  ol, li {
+    list-style: none;
   }
 `;
