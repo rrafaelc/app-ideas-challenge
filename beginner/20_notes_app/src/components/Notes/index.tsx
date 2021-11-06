@@ -1,7 +1,7 @@
 import { FiEdit, FiTrash2 } from 'react-icons/fi';
 
 import { NotesContainer, Content } from './styles';
-import { Markdown } from './Markdown';
+import { Markdown } from '../../services/Markdown';
 
 import { useModal } from '../../context/ModalContext';
 

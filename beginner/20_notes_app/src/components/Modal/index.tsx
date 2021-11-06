@@ -1,7 +1,7 @@
 import { ModalContainer, ModalContentLeft, ModalContentRight } from './styles';
 
 import { useModal } from '../../context/ModalContext';
-import { Markdown } from '../Notes/Markdown';
+import { Markdown } from '../../services/Markdown';
 
 export const Modal = () => {
 	const { isOpen, toggle } = useModal();
