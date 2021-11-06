@@ -1,6 +1,7 @@
 import { useState, ChangeEvent } from 'react';
-import { ModalContainer, ModalContentLeft, ModalContentRight } from './styles';
+import { marked } from 'marked';
 
+import { ModalContainer, ModalContentLeft, ModalContentRight } from './styles';
 import { Markdown } from '../../../services/Markdown';
 
 type Props = {
@@ -9,7 +10,12 @@ type Props = {
 };
 
 export const ModalCreate = ({ show, closeModal }: Props) => {
-	const [textArea, setTextArea] = useState('Create');
+	const [textArea, setTextArea] = useState('');
+
+	// https://github.com/markedjs/marked/issues/2265
+	// TODO: Waiting for declare type of this function
+	const html = marked.parse(textArea);
+	console.log(html);
 
 	const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
 		setTextArea(event.target.value);
