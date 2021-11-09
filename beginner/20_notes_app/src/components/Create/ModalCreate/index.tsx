@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { ModalContainer, ModalContentLeft, ModalContentRight } from './styles';
@@ -18,10 +18,16 @@ type Props = {
 };
 
 export const ModalCreate = ({ show, onCreate, closeModal }: Props) => {
+	const ref = useRef<HTMLDivElement>(null);
+
 	const [textArea, setTextArea] = useState('');
 
 	const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
 		setTextArea(event.target.value);
+
+		if (ref.current) {
+			ref.current.scrollTop = ref.current.scrollHeight;
+		}
 	};
 
 	const handleOnSave = () => {
@@ -69,7 +75,7 @@ export const ModalCreate = ({ show, onCreate, closeModal }: Props) => {
 			</ModalContentLeft>
 			<ModalContentRight>
 				<p id='title'>Preview</p>
-				<div id='preview'>
+				<div ref={ref} id='preview'>
 					<Markdown text={textArea} />
 				</div>
 			</ModalContentRight>

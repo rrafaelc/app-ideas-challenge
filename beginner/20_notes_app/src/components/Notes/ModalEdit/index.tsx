@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, useRef } from 'react';
 import { ModalContainer, ModalContentLeft, ModalContentRight } from './styles';
 
 import { Markdown } from '../../../services/Markdown';
@@ -10,10 +10,16 @@ type ModalProps = {
 };
 
 export const ModalEdit = ({ text, show, closeModal }: ModalProps) => {
+	const ref = useRef<HTMLDivElement>(null);
+
 	const [textArea, setTextArea] = useState(text);
 
 	const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
 		setTextArea(event.target.value);
+
+		if (ref.current) {
+			ref.current.scrollTop = ref.current.scrollHeight;
+		}
 	};
 
 	return (
@@ -31,7 +37,7 @@ export const ModalEdit = ({ text, show, closeModal }: ModalProps) => {
 			</ModalContentLeft>
 			<ModalContentRight>
 				<p id='title'>Preview</p>
-				<div id='preview'>
+				<div ref={ref} id='preview'>
 					<Markdown text={textArea} />
 				</div>
 			</ModalContentRight>
