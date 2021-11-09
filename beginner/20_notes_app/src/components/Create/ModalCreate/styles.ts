@@ -92,6 +92,7 @@ export const ModalContentRight = styled.div`
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 
 	#title {
+		margin: 0;
 		font-size: 20px;
 		font-weight: bold;
 		padding: 10px 0;
@@ -102,7 +103,7 @@ export const ModalContentRight = styled.div`
 	}
 
 	#preview {
-		padding: 20px;
+		padding: 0 20px;
 		width: 100%;
 		height: 90%;
 		overflow-y: auto;

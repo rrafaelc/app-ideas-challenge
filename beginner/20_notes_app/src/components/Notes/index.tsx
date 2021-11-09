@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const Notes = ({ id }: Props) => {
-	const [markdownText, setMarkdownText] = useState('');
+	const [markdownText, setMarkdownText] = useState('**MarkDown Test**');
 	const [showModal, setShowModal] = useState(false);
 
 	const closeModal = () => setShowModal(false);
