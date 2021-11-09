@@ -30,15 +30,16 @@ export const ModalCreate = ({ show, onCreate, closeModal }: Props) => {
 		}
 	};
 
+	const handleClose = () => {
+		setTextArea('');
+		closeModal();
+	};
+
 	const handleOnSave = () => {
 		const currentDate = new Date();
 
-		// Separate in two variables - 0000-00-00 00:00:00
-		const d1 = currentDate.toISOString().split('T')[0];
-		const d2 = currentDate.toISOString().split('T')[1].split('.')[0];
-
 		const id = uuidv4();
-		const date = `${d1} ${d2}`;
+		const date = currentDate.toLocaleString();
 		const time = currentDate.getTime();
 		const content = textArea;
 
@@ -65,7 +66,7 @@ export const ModalCreate = ({ show, onCreate, closeModal }: Props) => {
 					placeholder='Enter in markdown'
 				/>
 				<div className='btns'>
-					<button type='button' id='cancel' onClick={closeModal}>
+					<button type='button' id='cancel' onClick={handleClose}>
 						Cancel
 					</button>
 					<button type='button' id='save' onClick={handleOnSave}>

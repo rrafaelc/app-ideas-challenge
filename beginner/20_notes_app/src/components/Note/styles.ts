@@ -27,6 +27,11 @@ export const NotesContainer = styled.div`
 			display: flex;
 			align-items: center;
 			gap: 20px;
+
+			svg:hover {
+				stroke: #1d3557;
+				transition: stroke 0.2s;
+			}
 		}
 	}
 `;

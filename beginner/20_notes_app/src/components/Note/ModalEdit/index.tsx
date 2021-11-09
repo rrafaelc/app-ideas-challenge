@@ -4,12 +4,20 @@ import { ModalContainer, ModalContentLeft, ModalContentRight } from './styles';
 import { Markdown } from '../../../services/Markdown';
 
 type ModalProps = {
+	id: string;
 	text: string;
 	show: boolean;
 	closeModal: () => void;
+	onSave: (id: string, text: string) => void;
 };
 
-export const ModalEdit = ({ text, show, closeModal }: ModalProps) => {
+export const ModalEdit = ({
+	id,
+	text,
+	show,
+	closeModal,
+	onSave,
+}: ModalProps) => {
 	const ref = useRef<HTMLDivElement>(null);
 
 	const [textArea, setTextArea] = useState(text);
@@ -22,15 +30,24 @@ export const ModalEdit = ({ text, show, closeModal }: ModalProps) => {
 		}
 	};
 
+	const handleClose = () => {
+		setTextArea(text);
+		closeModal();
+	};
+
+	const handleSave = () => {
+		onSave(id, textArea);
+	};
+
 	return (
 		<ModalContainer isOpen={show}>
 			<ModalContentLeft>
 				<textarea value={textArea} onChange={handleChange} />
 				<div className='btns'>
-					<button type='button' id='cancel' onClick={closeModal}>
+					<button type='button' id='cancel' onClick={handleClose}>
 						Cancel
 					</button>
-					<button type='button' id='save'>
+					<button type='button' id='save' onClick={handleSave}>
 						Save
 					</button>
 				</div>

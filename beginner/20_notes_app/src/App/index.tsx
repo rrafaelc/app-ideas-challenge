@@ -18,6 +18,16 @@ export const App = () => {
 		setNotes(notes);
 	};
 
+	const handleOnUpdate = (id: string, text: string) => {
+		const newNotes = notes.map(note => {
+			if (note.id === id) {
+				return { ...note, content: text };
+			}
+			return note;
+		});
+		setNotes(newNotes);
+	};
+
 	useEffect(() => {
 		const notes = localStorage.getItem('@rrafaelc:notes-app');
 		if (notes) {
@@ -34,7 +44,17 @@ export const App = () => {
 			</Header>
 			<Container>
 				<Create onCreate={handleOnCreate} />
-				<Content>{}</Content>
+				<Content>
+					{notes.map(note => (
+						<Note
+							key={note.id}
+							id={note.id}
+							date={note.date}
+							content={note.content}
+							onUpdate={handleOnUpdate}
+						/>
+					))}
+				</Content>
 			</Container>
 			<Pagination />
 		</>

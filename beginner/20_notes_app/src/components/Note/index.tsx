@@ -6,28 +6,66 @@ import { Markdown } from '../../services/Markdown';
 
 import { ModalEdit } from './ModalEdit';
 
-type Props = {
+type NoteProps = {
 	id: string;
+	date: string;
+	content: string;
 };
 
-export const Note = ({ id }: Props) => {
-	const [markdownText, setMarkdownText] = useState('**MarkDown Test**');
+interface Props extends NoteProps {
+	onUpdate: (id: string, text: string) => void;
+}
+
+export const Note = ({ id, date, content, onUpdate }: Props) => {
 	const [showModal, setShowModal] = useState(false);
 
 	const closeModal = () => setShowModal(false);
 
+	const handleSave = (id: string, newText: string) => {
+		const oldNotes = JSON.parse(
+			localStorage.getItem('@rrafaelc:notes-app') || '[]',
+		);
+
+		const findNote = oldNotes.find((note: NoteProps) => note.id === id);
+
+		if (findNote) {
+			const updateNote = {
+				...findNote,
+				content: newText,
+			};
+
+			const newNotes: NoteProps = oldNotes.map((note: NoteProps) => {
+				if (note.id === id) {
+					return updateNote;
+				}
+				return note;
+			});
+
+			localStorage.setItem('@rrafaelc:notes-app', JSON.stringify(newNotes));
+		}
+
+		onUpdate(id, newText);
+		closeModal();
+	};
+
 	return (
 		<NotesContainer>
-			<ModalEdit show={showModal} text='Note Text' closeModal={closeModal} />
+			<ModalEdit
+				id={id}
+				show={showModal}
+				text={content}
+				closeModal={closeModal}
+				onSave={handleSave}
+			/>
 			<header>
-				<p>Created at 2021-11-04 22:18:22</p>
+				<p>Created at {date}</p>
 				<div className='icons'>
 					<FiEdit size={24} onClick={() => setShowModal(true)} />
 					<FiTrash2 size={24} />
 				</div>
 			</header>
 			<Content>
-				<Markdown text={markdownText} />
+				<Markdown text={content} />
 			</Content>
 		</NotesContainer>
 	);
