@@ -12,8 +12,7 @@ export const Markdown = ({ text }: MarkdownProps) => {
 
 	const markdownGuideText = `
 **Don't know how to write in markdown?**\n
-[Markdown Guide: Basic Syntax](https://www.markdownguide.org/basic-syntax/)\n
-*Writing in plain text is also valid.*
+[Markdown Guide: Basic Syntax](https://www.markdownguide.org/basic-syntax/)
   `;
 
 	return text ? (
