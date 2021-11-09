@@ -12,12 +12,20 @@ export const Markdown = ({ text }: MarkdownProps) => {
 
 	const markdownGuideText = `
 **Don't know how to write in markdown?**\n
-[Markdown Guide: Basic Syntax](https://www.markdownguide.org/basic-syntax/)
-  `;
+`;
 
 	return text ? (
 		<div dangerouslySetInnerHTML={getMarkdown(text)} />
 	) : (
-		<div dangerouslySetInnerHTML={getMarkdown(markdownGuideText)} />
+		<>
+			<div dangerouslySetInnerHTML={getMarkdown(markdownGuideText)} />
+			<a
+				href='https://www.markdownguide.org/basic-syntax/'
+				target='_blank'
+				rel='noopener noreferrer'
+			>
+				Markdown Guide: Basic Syntax
+			</a>
+		</>
 	);
 };
