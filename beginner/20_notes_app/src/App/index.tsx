@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Container, Header, Content } from './styles';
-import { Notes } from '../components/Notes';
+import { Note } from '../components/Note';
 import { Pagination } from '../components/Pagination';
 import { Create } from '../components/Create';
 
@@ -34,11 +34,7 @@ export const App = () => {
 			</Header>
 			<Container>
 				<Create onCreate={handleOnCreate} />
-				<Content>
-					<Notes id='asfafa' />
-					<Notes id='asfafa' />
-					<Notes id='asfafa' />
-				</Content>
+				<Content>{}</Content>
 			</Container>
 			<Pagination />
 		</>

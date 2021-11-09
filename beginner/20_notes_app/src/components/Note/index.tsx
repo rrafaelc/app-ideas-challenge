@@ -10,7 +10,7 @@ type Props = {
 	id: string;
 };
 
-export const Notes = ({ id }: Props) => {
+export const Note = ({ id }: Props) => {
 	const [markdownText, setMarkdownText] = useState('**MarkDown Test**');
 	const [showModal, setShowModal] = useState(false);
 
