@@ -14,9 +14,10 @@ type NoteProps = {
 
 interface Props extends NoteProps {
 	onUpdate: (id: string, text: string) => void;
+	onDelete: (id: string) => void;
 }
 
-export const Note = ({ id, date, content, onUpdate }: Props) => {
+export const Note = ({ id, date, content, onUpdate, onDelete }: Props) => {
 	const [showModal, setShowModal] = useState(false);
 
 	const closeModal = () => setShowModal(false);
@@ -48,6 +49,20 @@ export const Note = ({ id, date, content, onUpdate }: Props) => {
 		closeModal();
 	};
 
+	const handleDelete = () => {
+		const oldNotes = JSON.parse(
+			localStorage.getItem('@rrafaelc:notes-app') || '[]',
+		);
+
+		const newNotes: NoteProps = oldNotes.filter(
+			(note: NoteProps) => note.id !== id,
+		);
+
+		localStorage.setItem('@rrafaelc:notes-app', JSON.stringify(newNotes));
+
+		onDelete(id);
+	};
+
 	return (
 		<NotesContainer>
 			<ModalEdit
@@ -61,7 +76,7 @@ export const Note = ({ id, date, content, onUpdate }: Props) => {
 				<p>Created at {date}</p>
 				<div className='icons'>
 					<FiEdit size={24} onClick={() => setShowModal(true)} />
-					<FiTrash2 size={24} />
+					<FiTrash2 size={24} onClick={handleDelete} />
 				</div>
 			</header>
 			<Content>

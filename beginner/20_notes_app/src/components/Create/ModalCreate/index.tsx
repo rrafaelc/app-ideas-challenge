@@ -7,7 +7,6 @@ import { Markdown } from '../../../services/Markdown';
 type Notes = {
 	id: string;
 	date: string;
-	time: number;
 	content: string;
 };
 
@@ -40,10 +39,9 @@ export const ModalCreate = ({ show, onCreate, closeModal }: Props) => {
 
 		const id = uuidv4();
 		const date = currentDate.toLocaleString();
-		const time = currentDate.getTime();
 		const content = textArea;
 
-		const notes: Notes = { id, date, time, content };
+		const notes: Notes = { id, date, content };
 
 		const notesArray = JSON.parse(
 			localStorage.getItem('@rrafaelc:notes-app') || '[]',
