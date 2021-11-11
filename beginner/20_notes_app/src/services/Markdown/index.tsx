@@ -2,6 +2,8 @@ import marked from 'marked';
 import styled from 'styled-components';
 
 const Container = styled.div`
+	padding-top: 10px;
+
 	img {
 		max-width: 100%;
 	}
