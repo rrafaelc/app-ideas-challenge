@@ -1,4 +1,25 @@
 import marked from 'marked';
+import styled from 'styled-components';
+
+const Container = styled.div`
+	a {
+		text-decoration: none;
+		transition: all 0.2s;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+`;
+
+const Link = styled.a`
+	text-decoration: none;
+	transition: all 0.2s;
+
+	&:hover {
+		text-decoration: underline;
+	}
+`;
 
 type MarkdownProps = {
 	text: string;
@@ -15,17 +36,17 @@ export const Markdown = ({ text }: MarkdownProps) => {
 `;
 
 	return text ? (
-		<div dangerouslySetInnerHTML={getMarkdown(text)} />
+		<Container dangerouslySetInnerHTML={getMarkdown(text)} />
 	) : (
 		<>
-			<div dangerouslySetInnerHTML={getMarkdown(markdownGuideText)} />
-			<a
+			<Container dangerouslySetInnerHTML={getMarkdown(markdownGuideText)} />
+			<Link
 				href='https://www.markdownguide.org/basic-syntax/'
 				target='_blank'
 				rel='noopener noreferrer'
 			>
 				Markdown Guide: Basic Syntax
-			</a>
+			</Link>
 		</>
 	);
 };
