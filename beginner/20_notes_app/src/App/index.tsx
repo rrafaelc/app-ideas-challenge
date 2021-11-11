@@ -7,7 +7,6 @@ import { Create } from '../components/Create';
 type NotesProps = {
 	id: string;
 	date: string;
-	time: number;
 	content: string;
 };
 
@@ -34,6 +33,11 @@ export const App = () => {
 		setNotes(newNotes);
 	};
 
+	const handleOnDelete = (id: string) => {
+		const newNotes = notes.filter(note => note.id !== id);
+		setNotes(newNotes);
+	};
+
 	const displayNotes = notes
 		.slice(indexPage, indexPage + notesPerPage)
 		.map(note => (
@@ -43,6 +47,7 @@ export const App = () => {
 				date={note.date}
 				content={note.content}
 				onUpdate={handleOnUpdate}
+				onDelete={handleOnDelete}
 			/>
 		));
 
