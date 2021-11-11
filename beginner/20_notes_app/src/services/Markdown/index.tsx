@@ -2,6 +2,10 @@ import marked from 'marked';
 import styled from 'styled-components';
 
 const Container = styled.div`
+	img {
+		max-width: 100%;
+	}
+
 	a {
 		text-decoration: none;
 		transition: all 0.2s;
