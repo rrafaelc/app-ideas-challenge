@@ -6,7 +6,6 @@ import { CreateButton } from './styles';
 type Notes = {
 	id: string;
 	date: string;
-	time: number;
 	content: string;
 };
 
