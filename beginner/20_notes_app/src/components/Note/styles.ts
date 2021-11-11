@@ -24,6 +24,7 @@ export const NotesContainer = styled.div`
 
 		.icons {
 			cursor: pointer;
+			user-select: none;
 			display: flex;
 			align-items: center;
 			gap: 20px;
