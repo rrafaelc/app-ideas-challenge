@@ -1,32 +1,35 @@
+import ReactPaginate from 'react-paginate';
+
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 import { PaginationWrapper } from './styles';
 
-export const Pagination = () => (
-	<PaginationWrapper>
-		<button type='button' id='previous'>
-			<FiChevronLeft size={24} />
-		</button>
+type PaginationProps = {
+	pageCount: number;
+	onPageChange: (event: any) => void;
+};
 
-		<div className='numbers'>
-			<button type='button' className='number'>
-				1
-			</button>
-			<button type='button' className='number'>
-				2
-			</button>
-			<button type='button' className='number active'>
-				3
-			</button>
-			<button type='button' className='number'>
-				4
-			</button>
-			<button type='button' className='number'>
-				5
-			</button>
-		</div>
-		<button type='button' id='next'>
-			<FiChevronRight size={24} />
-		</button>
+// video: https://www.youtube.com/watch?v=HANSMtDy508
+// video: https://www.youtube.com/watch?v=YSlzQlEqTBg
+
+export const Pagination = ({ pageCount, onPageChange }: PaginationProps) => (
+	<PaginationWrapper>
+		<ReactPaginate
+			previousLabel={<FiChevronLeft size={24} />}
+			nextLabel={<FiChevronRight size={24} />}
+			breakLabel='...'
+			breakClassName='break-me'
+			pageCount={pageCount}
+			onPageChange={onPageChange}
+			containerClassName='pagination'
+			pageClassName='page-item'
+			pageLinkClassName='page-link'
+			previousLinkClassName='previous'
+			nextLinkClassName='next'
+			disabledClassName='disabled'
+			activeClassName='active'
+			pageRangeDisplayed={5}
+			marginPagesDisplayed={1}
+		/>
 	</PaginationWrapper>
 );
