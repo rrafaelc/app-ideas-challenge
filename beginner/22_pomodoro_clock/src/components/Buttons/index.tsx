@@ -8,7 +8,7 @@ export const Buttons = () => {
         <button>Reset</button>
         <button>Skip</button>
       </Btns>
-      <RoundBtn>
+      <RoundBtn aria-label="Pause">
         <FiPause size={35} />
       </RoundBtn>
     </ButtonsContainer>

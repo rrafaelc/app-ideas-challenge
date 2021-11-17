@@ -8,7 +8,7 @@ export const MenuButton = () => {
 
   return (
     <MenuButtonContainer>
-      <button type="button" onClick={openModal}>
+      <button type="button" aria-label="Settings" onClick={openModal}>
         <FiSettings size={30} color="#39415b" />
       </button>
     </MenuButtonContainer>
