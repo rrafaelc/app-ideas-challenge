@@ -9,15 +9,29 @@ export const ClockContainer = styled.div`
   justify-content: center;
   align-items: center;
 
+  @media (min-width: 1000px) {
+    width: 300px;
+    height: 300px;
+  }
+
   #countdown-number {
     color: rgba(255, 255, 255, 0.8);
     font-size: 40px;
+
+    @media (min-width: 1000px) {
+      font-size: 52px;
+    }
   }
 
   svg {
     width: 220px;
     height: 220px;
     position: absolute;
+
+    @media (min-width: 1000px) {
+      width: 300px;
+      height: 300px;
+    }
   }
 
   svg circle {

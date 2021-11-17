@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 
-import { useWindowsDimension } from "../services/windowsDimension";
-import { MenuMobile } from "../components/MenuMobile";
+import { Menu } from "../components/Menu";
 
 type ModalContextType = {
   openModal: () => void;
@@ -12,7 +11,6 @@ const ModalContext = createContext({} as ModalContextType);
 
 export const ModalProvider: React.FC = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { width } = useWindowsDimension();
 
   const openModal = () => {
     setIsOpen(true);
@@ -24,7 +22,7 @@ export const ModalProvider: React.FC = ({ children }) => {
 
   return (
     <ModalContext.Provider value={{ openModal, closeModal }}>
-      {width < 960 && isOpen && <MenuMobile />}
+      {isOpen && <Menu />}
       {children}
     </ModalContext.Provider>
   );

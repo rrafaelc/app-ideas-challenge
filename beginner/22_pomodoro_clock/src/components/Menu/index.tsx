@@ -7,7 +7,7 @@ import hand from "../../assets/clarity_cursor-hand-click-line.svg";
 import { NewValue } from "../NewValue";
 import { useModal } from "../../context/ModalContext";
 
-export const MenuMobile = () => {
+export const Menu = () => {
   const [isOpenNewValue, setIsOpenNewValue] = useState(false);
   const { closeModal } = useModal();
 
