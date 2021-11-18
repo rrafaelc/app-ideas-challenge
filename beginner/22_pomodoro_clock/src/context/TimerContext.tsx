@@ -9,6 +9,9 @@ import React, {
 type TimerContextType = {
   timer: number;
   formattedTimer: string;
+  workingTimer: number;
+  breakTimer: number;
+  longBreakTimer: number;
   setWorkingTime: (time: number) => void;
   setBreakTime: (time: number) => void;
   setLongBreakTime: (time: number) => void;
@@ -33,6 +36,7 @@ export const TimerProvider: React.FC = ({ children }) => {
   const [sessionCount, setSessionCount] = useState(1);
   const [isStart, setIsStart] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
+  const [update, setUpdate] = useState(false);
 
   const formatSecondsToMinutes = useCallback((seconds: number) => {
     const minutes = Math.floor(seconds / 60);
@@ -141,35 +145,44 @@ export const TimerProvider: React.FC = ({ children }) => {
 
   const setWorkingTime = useCallback(
     (time: number) => {
-      if (isNaN(time)) return;
+      if (isNaN(time)) {
+        setUpdate(true);
+        return;
+      }
 
       const removePoint = time.toString().split(".")[0];
       setWorkingTimer(parseInt(removePoint));
-      updateTimer();
+      setUpdate(true);
     },
-    [updateTimer]
+    [setUpdate]
   );
 
   const setBreakTime = useCallback(
     (time: number) => {
-      if (isNaN(time)) return;
+      if (isNaN(time)) {
+        setUpdate(true);
+        return;
+      }
 
       const removePoint = time.toString().split(".")[0];
       setBreakTimer(parseInt(removePoint));
-      updateTimer();
+      setUpdate(true);
     },
-    [updateTimer]
+    [setUpdate]
   );
 
   const setLongBreakTime = useCallback(
     (time: number) => {
-      if (isNaN(time)) return;
+      if (isNaN(time)) {
+        setUpdate(true);
+        return;
+      }
 
       const removePoint = time.toString().split(".")[0];
       setLongBreakTimer(parseInt(removePoint));
-      updateTimer();
+      setUpdate(true);
     },
-    [updateTimer]
+    [setUpdate]
   );
 
   useEffect(() => {
@@ -198,11 +211,22 @@ export const TimerProvider: React.FC = ({ children }) => {
     return () => clearInterval(interval);
   }, [isStart, timer, formatSecondsToMinutes]);
 
+  useEffect(() => {
+    if (update) {
+      updateTimer();
+    }
+
+    setUpdate(false);
+  }, [updateTimer, update]);
+
   return (
     <TimerContext.Provider
       value={{
         timer,
         formattedTimer,
+        workingTimer,
+        breakTimer,
+        longBreakTimer,
         setWorkingTime,
         setBreakTime,
         setLongBreakTime,
@@ -228,6 +252,9 @@ export const useTimer = () => {
   const {
     timer,
     formattedTimer,
+    workingTimer,
+    breakTimer,
+    longBreakTimer,
     setWorkingTime,
     setBreakTime,
     setLongBreakTime,
@@ -242,6 +269,9 @@ export const useTimer = () => {
   return {
     timer,
     formattedTimer,
+    workingTimer,
+    breakTimer,
+    longBreakTimer,
     setWorkingTime,
     setBreakTime,
     setLongBreakTime,
