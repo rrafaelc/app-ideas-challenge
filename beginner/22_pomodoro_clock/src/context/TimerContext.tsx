@@ -6,6 +6,8 @@ import React, {
   useState,
 } from "react";
 
+import bell from "../assets/bell.mp3";
+
 type TimerContextType = {
   timer: number;
   formattedTimer: string;
@@ -19,6 +21,9 @@ type TimerContextType = {
   pauseTimer: () => void;
   resetTimer: () => void;
   skipTimer: () => void;
+  enableSound: () => void;
+  disableSound: () => void;
+  soundEnabled: boolean;
   sessionCount: number;
   isStart: boolean;
 };
@@ -37,6 +42,22 @@ export const TimerProvider: React.FC = ({ children }) => {
   const [isStart, setIsStart] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   const [update, setUpdate] = useState(false);
+
+  const [soundEnabled, setSoundEnabled] = useState(true);
+
+  const playAudio = useCallback(() => {
+    const audio = new Audio(bell);
+
+    soundEnabled && audio.play();
+  }, [soundEnabled]);
+
+  const enableSound = useCallback(() => {
+    setSoundEnabled(true);
+  }, []);
+
+  const disableSound = useCallback(() => {
+    setSoundEnabled(false);
+  }, []);
 
   const formatSecondsToMinutes = useCallback((seconds: number) => {
     const minutes = Math.floor(seconds / 60);
@@ -199,6 +220,7 @@ export const TimerProvider: React.FC = ({ children }) => {
         setTimer(timer - 1);
 
         if (timer === 0) {
+          playAudio();
           setIsStart(false);
           setIsFinished(true);
           clearInterval(interval);
@@ -209,7 +231,7 @@ export const TimerProvider: React.FC = ({ children }) => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [isStart, timer, formatSecondsToMinutes]);
+  }, [isStart, timer, formatSecondsToMinutes, playAudio]);
 
   useEffect(() => {
     if (update) {
@@ -234,6 +256,9 @@ export const TimerProvider: React.FC = ({ children }) => {
         pauseTimer,
         resetTimer,
         skipTimer,
+        enableSound,
+        disableSound,
+        soundEnabled,
         sessionCount,
         isStart,
       }}
@@ -262,6 +287,9 @@ export const useTimer = () => {
     pauseTimer,
     resetTimer,
     skipTimer,
+    enableSound,
+    disableSound,
+    soundEnabled,
     sessionCount,
     isStart,
   } = context;
@@ -279,6 +307,9 @@ export const useTimer = () => {
     pauseTimer,
     resetTimer,
     skipTimer,
+    enableSound,
+    disableSound,
+    soundEnabled,
     sessionCount,
     isStart,
   };

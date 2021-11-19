@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { MenuContainer, Modal } from "./styles";
 import { VscDebugRestart } from "react-icons/vsc";
+import { FiVolume2, FiVolumeX } from "react-icons/fi";
 
 import hand from "../../assets/clarity_cursor-hand-click-line.svg";
 
@@ -22,6 +23,9 @@ export const Menu = () => {
     setWorkingTime,
     setBreakTime,
     setLongBreakTime,
+    enableSound,
+    disableSound,
+    soundEnabled,
   } = useTimer();
 
   const handleModal = () => setOpenModal(!openModal);
@@ -61,7 +65,18 @@ export const Menu = () => {
     <MenuContainer>
       {openModal && <NewValue close={handleModal} setTimer={setTimer} />}
       <Modal>
-        <p>Settings</p>
+        <div className="title">
+          <p>Settings</p>
+          {soundEnabled ? (
+            <button type="button" title="Volume Enabled" onClick={disableSound}>
+              <FiVolume2 size={30} />
+            </button>
+          ) : (
+            <button type="button" title="Volume Disabled" onClick={enableSound}>
+              <FiVolumeX size={30} />
+            </button>
+          )}
+        </div>
 
         <div id="options">
           <button

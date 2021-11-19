@@ -23,10 +23,41 @@ export const Modal = styled.div`
 
   background: #39415b;
 
-  p {
+  .title {
     margin-top: 20px;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 24px;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+
+    p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 24px;
+    }
+
+    button {
+      position: absolute;
+      top: 0;
+      left: 30px;
+
+      background: transparent;
+      border: 0;
+      color: rgba(255, 255, 255, 0.8);
+
+      @media (hover: hover) {
+        &:hover {
+          transition: transform 0.2s;
+          transform: scale(1.1);
+        }
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
   }
 
   #options {
