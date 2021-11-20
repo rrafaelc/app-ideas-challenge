@@ -23,9 +23,12 @@ type TimerContextType = {
   skipTimer: () => void;
   enableSound: () => void;
   disableSound: () => void;
-  soundEnabled: boolean;
+  isSoundEnabled: boolean;
   sessionCount: number;
-  isStart: boolean;
+  sessionName: string;
+  isStarted: boolean;
+  isFinished: boolean;
+  isSkipped: boolean;
 };
 
 const TimerContext = createContext({} as TimerContextType);
@@ -39,25 +42,23 @@ export const TimerProvider: React.FC = ({ children }) => {
   const [longBreakTimer, setLongBreakTimer] = useState(15 * 60);
 
   const [sessionCount, setSessionCount] = useState(1);
-  const [isStart, setIsStart] = useState(false);
+  const [sessionName, setSessionName] = useState("Working");
+
+  const [isStarted, setIsStarted] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   const [update, setUpdate] = useState(false);
+  const [isSkipped, setIsSkipped] = useState(false);
 
-  const [soundEnabled, setSoundEnabled] = useState(true);
+  const [isSoundEnabled, setIsSoundEnabled] = useState(true);
 
   const playAudio = useCallback(() => {
     const audio = new Audio(bell);
 
-    soundEnabled && audio.play();
-  }, [soundEnabled]);
+    isSoundEnabled && audio.play();
+  }, [isSoundEnabled]);
 
-  const enableSound = useCallback(() => {
-    setSoundEnabled(true);
-  }, []);
-
-  const disableSound = useCallback(() => {
-    setSoundEnabled(false);
-  }, []);
+  const enableSound = useCallback(() => setIsSoundEnabled(true), []);
+  const disableSound = useCallback(() => setIsSoundEnabled(false), []);
 
   const formatSecondsToMinutes = useCallback((seconds: number) => {
     const minutes = Math.floor(seconds / 60);
@@ -66,7 +67,7 @@ export const TimerProvider: React.FC = ({ children }) => {
   }, []);
 
   const updateTimer = useCallback(() => {
-    setIsStart(false);
+    setIsStarted(false);
 
     setTimer(workingTimer);
     setFormattedTimer(formatSecondsToMinutes(workingTimer));
@@ -76,16 +77,20 @@ export const TimerProvider: React.FC = ({ children }) => {
     setLongBreakTimer(longBreakTimer);
 
     setSessionCount(1);
+    setIsSkipped(true);
+    setIsFinished(false);
   }, [workingTimer, breakTimer, longBreakTimer, formatSecondsToMinutes]);
 
   const resetTimer = useCallback(() => {
-    setIsStart(false);
+    setIsStarted(false);
     setTimer(25 * 60);
     setFormattedTimer("25:00");
     setWorkingTimer(25 * 60);
     setBreakTimer(5 * 60);
     setLongBreakTimer(15 * 60);
     setSessionCount(1);
+    setIsSkipped(true);
+    setIsFinished(false);
   }, []);
 
   const skipTimer = useCallback(() => {
@@ -93,7 +98,9 @@ export const TimerProvider: React.FC = ({ children }) => {
     // because the sessionCount state is not updated yet
     // for use in switch case
     const sessionLocal = sessionCount + 1;
-    setIsStart(false);
+
+    setIsSkipped(true);
+    setIsStarted(false);
 
     // When the total pomodoro session is not reached yet
     if (sessionLocal <= 8) {
@@ -107,16 +114,19 @@ export const TimerProvider: React.FC = ({ children }) => {
       case 3:
       case 5:
       case 7:
+        setSessionName("Working");
         setTimer(workingTimer);
         setFormattedTimer(formatSecondsToMinutes(workingTimer));
         break;
       case 2:
       case 4:
       case 6:
+        setSessionName("Break");
         setTimer(breakTimer);
         setFormattedTimer(formatSecondsToMinutes(breakTimer));
         break;
       case 8:
+        setSessionName("Long Break");
         setTimer(longBreakTimer);
         setFormattedTimer(formatSecondsToMinutes(longBreakTimer));
         break;
@@ -135,13 +145,11 @@ export const TimerProvider: React.FC = ({ children }) => {
   ]);
 
   const startTimer = useCallback(() => {
-    // There is a delay of 1~2 second until the state is updated from interval in useEffect.
-    // So decrease the timer by 1 second
-    setTimer((prevTimer) => prevTimer - 1);
-
     if (isFinished) {
       skipTimer();
     }
+
+    setIsSkipped(false);
 
     // When pomodoro session is finished, reset the timer,
     // if the user clicks the start button again
@@ -152,7 +160,7 @@ export const TimerProvider: React.FC = ({ children }) => {
     }
 
     setIsFinished(false);
-    setIsStart(true);
+    setIsStarted(true);
   }, [
     sessionCount,
     isFinished,
@@ -162,7 +170,7 @@ export const TimerProvider: React.FC = ({ children }) => {
     formatSecondsToMinutes,
   ]);
 
-  const pauseTimer = useCallback(() => setIsStart(false), []);
+  const pauseTimer = useCallback(() => setIsStarted(false), []);
 
   const setWorkingTime = useCallback(
     (time: number) => {
@@ -216,12 +224,12 @@ export const TimerProvider: React.FC = ({ children }) => {
     }
 
     const interval = setInterval(() => {
-      if (isStart) {
+      if (isStarted) {
         setTimer(timer - 1);
 
         if (timer === 0) {
           playAudio();
-          setIsStart(false);
+          setIsStarted(false);
           setIsFinished(true);
           clearInterval(interval);
         }
@@ -231,7 +239,7 @@ export const TimerProvider: React.FC = ({ children }) => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [isStart, timer, formatSecondsToMinutes, playAudio]);
+  }, [isStarted, timer, formatSecondsToMinutes, playAudio]);
 
   useEffect(() => {
     if (update) {
@@ -258,9 +266,12 @@ export const TimerProvider: React.FC = ({ children }) => {
         skipTimer,
         enableSound,
         disableSound,
-        soundEnabled,
+        isSoundEnabled,
         sessionCount,
-        isStart,
+        sessionName,
+        isStarted,
+        isFinished,
+        isSkipped,
       }}
     >
       {children}
@@ -289,9 +300,12 @@ export const useTimer = () => {
     skipTimer,
     enableSound,
     disableSound,
-    soundEnabled,
+    isSoundEnabled,
     sessionCount,
-    isStart,
+    sessionName,
+    isStarted,
+    isFinished,
+    isSkipped,
   } = context;
 
   return {
@@ -309,8 +323,11 @@ export const useTimer = () => {
     skipTimer,
     enableSound,
     disableSound,
-    soundEnabled,
+    isSoundEnabled,
     sessionCount,
-    isStart,
+    sessionName,
+    isStarted,
+    isFinished,
+    isSkipped,
   };
 };

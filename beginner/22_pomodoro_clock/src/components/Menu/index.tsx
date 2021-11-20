@@ -25,7 +25,7 @@ export const Menu = () => {
     setLongBreakTime,
     enableSound,
     disableSound,
-    soundEnabled,
+    isSoundEnabled,
   } = useTimer();
 
   const handleModal = () => setOpenModal(!openModal);
@@ -67,7 +67,7 @@ export const Menu = () => {
       <Modal>
         <div className="title">
           <p>Settings</p>
-          {soundEnabled ? (
+          {isSoundEnabled ? (
             <button type="button" title="Volume Enabled" onClick={disableSound}>
               <FiVolume2 size={30} />
             </button>

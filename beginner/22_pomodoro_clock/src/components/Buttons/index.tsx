@@ -7,7 +7,7 @@ import { ButtonsContainer, Btns, RoundBtn } from "./styles";
 
 export const Buttons = () => {
   const {
-    isStart,
+    isStarted,
     startTimer,
     pauseTimer,
     resetTimer,
@@ -41,7 +41,7 @@ export const Buttons = () => {
           Skip
         </button>
       </Btns>
-      {isStart ? (
+      {isStarted ? (
         <RoundBtn title="Pause" aria-label="Pause" onClick={pauseTimer}>
           <FiPause size={35} />
         </RoundBtn>
