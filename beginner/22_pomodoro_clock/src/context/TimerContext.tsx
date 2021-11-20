@@ -133,9 +133,6 @@ export const TimerProvider: React.FC = ({ children }) => {
       default:
         break;
     }
-
-    // Pomodoro session is finished
-    if (sessionLocal >= 8) return;
   }, [
     sessionCount,
     workingTimer,
@@ -155,6 +152,7 @@ export const TimerProvider: React.FC = ({ children }) => {
     // if the user clicks the start button again
     if (sessionCount >= 8 && isFinished) {
       setSessionCount(1);
+      setSessionName("Working");
       setTimer(workingTimer);
       setFormattedTimer(formatSecondsToMinutes(workingTimer));
     }
