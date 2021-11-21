@@ -39,7 +39,7 @@ export const TimerProvider: React.FC = ({ children }) => {
 
   const [workingTimer, setWorkingTimer] = useState(25 * 60);
   const [breakTimer, setBreakTimer] = useState(5 * 60);
-  const [longBreakTimer, setLongBreakTimer] = useState(15 * 60);
+  const [longBreakTimer, setLongBreakTimer] = useState(10 * 60);
 
   const [sessionCount, setSessionCount] = useState(1);
   const [sessionName, setSessionName] = useState("Working");
@@ -77,6 +77,7 @@ export const TimerProvider: React.FC = ({ children }) => {
     setLongBreakTimer(longBreakTimer);
 
     setSessionCount(1);
+    setSessionName("Working");
     setIsSkipped(true);
     setIsFinished(false);
   }, [workingTimer, breakTimer, longBreakTimer, formatSecondsToMinutes]);
@@ -87,8 +88,9 @@ export const TimerProvider: React.FC = ({ children }) => {
     setFormattedTimer("25:00");
     setWorkingTimer(25 * 60);
     setBreakTimer(5 * 60);
-    setLongBreakTimer(15 * 60);
+    setLongBreakTimer(10 * 60);
     setSessionCount(1);
+    setSessionName("Working");
     setIsSkipped(true);
     setIsFinished(false);
   }, []);
