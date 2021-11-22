@@ -1,9 +1,6 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 type Props = {
-  seconds: number;
-  isStarted: boolean;
-  isSkipped: boolean;
   isFinished: boolean;
 };
 
@@ -47,31 +44,6 @@ export const ClockContainer = styled.div<Props>`
   }
 
   .c1 {
-    stroke: ${({ isFinished }) => (!isFinished ? "#1a1a1a" : "#216323")};
-  }
-
-  .c2 {
-    stroke: #8e2b24;
-
-    stroke-dasharray: 114;
-    stroke-dashoffset: 114;
-    stroke-linecap: round;
-
-    transform: rotate(-90deg);
-
-    ${({ isFinished, isSkipped, seconds }) =>
-      !isFinished &&
-      !isSkipped &&
-      css`
-        animation: anim ${seconds}s linear forwards;
-      `}
-    animation-play-state: ${(props) =>
-      props.isStarted ? "running" : "paused"};
-  }
-
-  @keyframes anim {
-    100% {
-      stroke-dashoffset: 0;
-    }
+    stroke: ${({ isFinished }) => (!isFinished ? "#8e2b24" : "#216323")};
   }
 `;
